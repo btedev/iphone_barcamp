@@ -10,6 +10,7 @@
 #import <CommonCrypto/CommonDigest.h> //for MD5 function (see end of this file)
 
 static NSMutableArray *allObjects = nil;
+static NSMutableArray *periodObjects = nil;
 static NSString *lastHash = nil;
 static NSDate *earliestTalk = nil;
 static NSDate *latestTalk = nil;
@@ -63,14 +64,13 @@ static NSDate *latestTalk = nil;
 	}	
 		
 	[allObjects release];
-	[objects retain];
-	allObjects = objects;
+	allObjects = [objects retain];
 	
 	return YES;
 }
 
 + (NSArray *)talksBetweenTimeA:(NSDate *)a andTimeB:(NSDate *)b {	
-	NSMutableArray *objects = [[NSMutableArray alloc] init];
+	NSMutableArray *objects = [NSMutableArray array];
 	for(Talk *t in allObjects) {
 		NSComparisonResult compareStart = [t.startTime compare:a];
 		NSComparisonResult compareEnd = [t.startTime compare:b];
@@ -80,7 +80,10 @@ static NSDate *latestTalk = nil;
 			[objects addObject:t];
 		}
 	}
-	return objects;
+
+	[periodObjects release];
+	periodObjects = [objects retain];
+	return periodObjects;
 }
 
 + (NSDate *)earliestTalkTime {

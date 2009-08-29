@@ -23,3 +23,8 @@ THE SOFTWARE.
 -------------------------------------------------------------------------------
 
 Description: iPhone app designed to retrieve schedule information for BarCamp TampaBay 2009 and allow users to mark and persist an array of favorite talks.  
+
+Four of the images used in the app are not open sourced and have not been included in the git repository.  The app will not look or work correctly until the correct or substitue images are added to the project. 
+
+The commercial images removed are: forward.png, back.png, money.png, and calendar.png
+They may be purchased as a set from: http://eddit.com/shop/iphone_ui_icon_set/
