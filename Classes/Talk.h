@@ -48,6 +48,7 @@
 + (NSArray *)talksBetweenTimeA:(NSDate *)a andTimeB:(NSDate *)b;
 + (NSDate *)earliestTalkTime;
 + (NSDate *)latestTalkTime;
++ (int)talksCount;
 
 - (id)initWithDictionary:(NSDictionary *)dict andFavorites:(NSArray *)favs;
 - (NSDate *)parseTimeString:(NSString *)timeString;

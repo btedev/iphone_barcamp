@@ -15,7 +15,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	//position table precisely
 	[tableView setFrame:CGRectMake(0,0,320,368)];
+	
+	//we wane the back button text on children of this navigation item (TalkViewController) 
+	//to see "Talks" instead of the current hour
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Talks" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [backButton release]; 
 	
 	//create a NSOperationQueue for background HTTP requests
 	queue = [[NSOperationQueue alloc] init];
@@ -56,10 +63,6 @@
 	NSString *response = [request responseString];
 	BOOL changed = [Talk loadTalksFromJsonString:response];	
 	
-	if (changed) {
-		[self refreshHour];
-	}
-	
 	//create timer to recheck schedule in 120 seconds if timer doesn't yet exist
 	if (!refreshTimer) {
 		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:120 
@@ -68,6 +71,21 @@
 													  userInfo:nil 
 													   repeats:YES];		
 	}
+	
+	//load the table if any changes were detected from the last run, or if this is the first run
+	if (changed) {
+		
+		//If the app is loaded before the schedule is set, the object count will be 0. 
+		//Let user know this behavior is correct.
+		if ([Talk talksCount] == 0) {
+			NSString *msg = @"BarCamp is an unconference, so the schedule won't be set until the morning of the event. Please check back then.";
+			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"You're Early!" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+			[alert show];
+			return;
+		}
+			
+		[self refreshHour];
+	}	
 }
 
 - (void)scheduleRequestError:(ASIHTTPRequest *)request {

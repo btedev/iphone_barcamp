@@ -94,6 +94,13 @@ static NSDate *latestTalk = nil;
 	return latestTalk;
 }
 
++ (int)talksCount {
+	if (allObjects) {
+		return [allObjects count];
+	}
+	return 0;
+}
+
 
 //Create Talk instance from JSON Dictionary
 - (id)initWithDictionary:(NSDictionary *)dict andFavorites:(NSArray *)favs{
