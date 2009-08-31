@@ -37,6 +37,8 @@
 		4C1120E61046DF7D00A82857 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1120E51046DF7D00A82857 /* forward.png */; };
 		4C11212F1046EE7D00A82857 /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11212E1046EE7D00A82857 /* TalkViewController.m */; };
 		4C1121311046EE8C00A82857 /* TalkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C1121301046EE8C00A82857 /* TalkView.xib */; };
+		4C326C2A104C7678006CD6E5 /* BarCamp_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C326C29104C7678006CD6E5 /* BarCamp_57.png */; };
+		4C326C2C104C7686006CD6E5 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 4C326C2B104C7686006CD6E5 /* iTunesArtwork */; };
 		4C592B78104B15E200E36472 /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C592B77104B15E200E36472 /* SponsorCell.m */; };
 		4CA74D1E1044D5B90093DBBF /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA74D1D1044D5B90093DBBF /* ScheduleViewController.m */; };
 		4CA74D211044D6100093DBBF /* ScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA74D201044D6100093DBBF /* ScheduleView.xib */; };
@@ -100,6 +102,8 @@
 		4C11212D1046EE7D00A82857 /* TalkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkViewController.h; sourceTree = "<group>"; };
 		4C11212E1046EE7D00A82857 /* TalkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkViewController.m; sourceTree = "<group>"; };
 		4C1121301046EE8C00A82857 /* TalkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TalkView.xib; sourceTree = "<group>"; };
+		4C326C29104C7678006CD6E5 /* BarCamp_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarCamp_57.png; sourceTree = "<group>"; };
+		4C326C2B104C7686006CD6E5 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		4C592B76104B15E200E36472 /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		4C592B77104B15E200E36472 /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
 		4CA74D1C1044D5B90093DBBF /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
@@ -205,21 +209,23 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4C1120E51046DF7D00A82857 /* forward.png */,
+				4C326C2B104C7686006CD6E5 /* iTunesArtwork */,
+				4C326C29104C7678006CD6E5 /* BarCamp_57.png */,
 				4C1120E31046DF6B00A82857 /* back.png */,
-				4C1120DD1046D8AE00A82857 /* money.png */,
+				8D1107310486CEB800E47090 /* BarCamp-Info.plist */,
 				4C1120DB1046D89C00A82857 /* calendar.png */,
+				4C1120E51046DF7D00A82857 /* forward.png */,
+				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+				4C1120DD1046D8AE00A82857 /* money.png */,
+				4CA74D811044DD550093DBBF /* RootView.xib */,
+				4CA74D201044D6100093DBBF /* ScheduleView.xib */,
+				282CCBFD0DB6C98000C4EA27 /* SecondView.xib */,
+				4C0FFAA9104B12670023566E /* SponsorCell.xib */,
+				4C0FF9EC104B04E40023566E /* SponsorsViewController.xib */,
 				4C1120601046CE3200A82857 /* star_selected.png */,
 				4C11205E1046CE1C00A82857 /* star_unselected.png */,
-				282CCBFD0DB6C98000C4EA27 /* SecondView.xib */,
-				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* BarCamp-Info.plist */,
-				4CA74D201044D6100093DBBF /* ScheduleView.xib */,
-				4CA74D811044DD550093DBBF /* RootView.xib */,
 				4C111F911045F47000A82857 /* TalkCell.xib */,
 				4C1121301046EE8C00A82857 /* TalkView.xib */,
-				4C0FF9EC104B04E40023566E /* SponsorsViewController.xib */,
-				4C0FFAA9104B12670023566E /* SponsorCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -337,6 +343,8 @@
 				4C1121311046EE8C00A82857 /* TalkView.xib in Resources */,
 				4C0FF9ED104B04E40023566E /* SponsorsViewController.xib in Resources */,
 				4C0FFAAA104B12670023566E /* SponsorCell.xib in Resources */,
+				4C326C2A104C7678006CD6E5 /* BarCamp_57.png in Resources */,
+				4C326C2C104C7686006CD6E5 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,11 +429,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DockMarket, LLC";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6444D596-8A0C-404B-AEEE-4310E92F101D";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;

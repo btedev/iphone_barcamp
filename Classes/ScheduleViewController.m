@@ -28,6 +28,8 @@
 	queue = [[NSOperationQueue alloc] init];
 	[queue retain];
 	
+	//add left and right buttons.  Note: see README regarding button images.  They are commercial and are not included
+	//in the source posted on github
 	UIButton *rButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	rButton.bounds = CGRectMake(0,0,36,36);
 	[rButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
@@ -43,6 +45,13 @@
 	UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:lButton];
 	self.navigationItem.leftBarButtonItem = leftItem;
 	[leftItem release];
+	
+	//add an activity indicator
+	spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[spinner setFrame:CGRectMake(148,100,24,24)];
+	spinner.hidesWhenStopped = YES;
+	[self.view addSubview:spinner];
+	[spinner release];
 
 	[self refreshSchedule];
 }
@@ -53,13 +62,17 @@
 	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSURL *url = [NSURL URLWithString:[[delegate baseUrl] stringByAppendingString:@"/talks.json"]];
 	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
+	[request setTimeOutSeconds:15];
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(scheduleRequestDone:)];
 	[request setDidFailSelector:@selector(scheduleRequestError:)];
+	
+	[spinner startAnimating];
 	[queue addOperation:request];
 }
 
 - (void)scheduleRequestDone:(ASIHTTPRequest *)request {	
+	[spinner stopAnimating];
 	NSString *response = [request responseString];
 	BOOL changed = [Talk loadTalksFromJsonString:response];	
 	
@@ -89,6 +102,7 @@
 }
 
 - (void)scheduleRequestError:(ASIHTTPRequest *)request {
+	[spinner stopAnimating];
 	NSError *error = [request error];
 	NSString *msg = [NSString stringWithFormat:@"A problem occurred when trying to contact the server. Please check your internet connection and try again. Error: %@",
 					 [error localizedDescription]];

@@ -13,6 +13,7 @@
 
 @interface ScheduleViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	IBOutlet UITableView *tableView;
+	UIActivityIndicatorView *spinner;
 	NSArray *talks;
 	NSDate *currentHour;
 	NSTimer *refreshTimer;
