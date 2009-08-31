@@ -13,12 +13,6 @@
 
 @synthesize sponsor;
 
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        // Initialization code
-    }
-    return self;
-}
 
 - (void)setSponsor:(Sponsor *)newSponsor {
 	Sponsor *oldSponsor = sponsor;

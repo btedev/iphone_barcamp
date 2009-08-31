@@ -24,21 +24,9 @@
 
 //So this isn't littered around the app
 - (NSString *)baseUrl {
-	return @"http://localhost:3000";
+	//return @"http://127.0.0.1:3000";
+	return @"http://barcamptampabayapi.org";
 }
-
-/*
-// Optional UITabBarControllerDelegate method
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed {
-}
-*/
-
 
 - (void)dealloc {
     [tabBarController release];

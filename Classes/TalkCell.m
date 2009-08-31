@@ -28,13 +28,6 @@ static NSArray *colors = nil;
 	[colors retain];
 }
 
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
-        // Initialization code
-	}
-    return self;
-}
-
 - (void)setTalk:(Talk *)newTalk {
 	Talk *oldTalk = talk;
 	[oldTalk release];
