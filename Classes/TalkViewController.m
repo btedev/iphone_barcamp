@@ -53,7 +53,7 @@
 }
 
 - (void)favoriteButtonWasPressed {
-	[talk changeFavorite:!talk.favorite];	
+	talk.favorite = !talk.favorite;	
 	UIImage *star;
 	if ([talk favorite]) star = [UIImage imageNamed:@"star_selected.png"];
 	else star = [UIImage imageNamed:@"star_unselected.png"];

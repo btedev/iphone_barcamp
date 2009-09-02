@@ -64,7 +64,7 @@ static NSArray *colors = nil;
 //note: since this is a FavoriteChangeDelegate the event will be received 
 //that way which will cause the image to be changed
 - (void)favoriteButtonWasPressed {
-	[talk changeFavorite:!talk.favorite];	
+	talk.favorite = !talk.favorite;	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {    

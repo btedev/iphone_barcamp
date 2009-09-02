@@ -54,6 +54,5 @@
 - (NSDate *)parseTimeString:(NSString *)timeString;
 - (NSString *)startTimeString;
 - (NSString *)endTimeString;
-- (void)changeFavorite:(BOOL)isFavorite;
 
 @end

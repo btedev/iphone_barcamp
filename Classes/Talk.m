@@ -60,6 +60,8 @@ static NSDate *latestTalk = nil;
 				NSDateComponents *comps = [cal components:(NSMinuteCalendarUnit) fromDate:t.startTime];
 				if ([comps minute] == 0) latestTalk = t.startTime;		
 			}
+			
+			[t release];
 		}
 	}	
 		
@@ -173,8 +175,8 @@ static NSDate *latestTalk = nil;
 //Since favorites is not technically a default, it should more correctly 
 //be persisted to a prefs file or a DB, but since the file will have very limited
 //scope, it shouldn't be a problem.
-- (void)changeFavorite:(BOOL)isFavorite {	
-	self.favorite = isFavorite;
+- (void)setFavorite:(BOOL)isFavorite {	
+	favorite = isFavorite;
 	
 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	NSMutableArray *allFavs;
