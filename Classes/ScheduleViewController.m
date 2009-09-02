@@ -18,7 +18,7 @@
 	//position table precisely
 	[tableView setFrame:CGRectMake(0,0,320,368)];
 	
-	//we wane the back button text on children of this navigation item (TalkViewController) 
+	//we want the back button text on children of this navigation item (TalkViewController) 
 	//to see "Talks" instead of the current hour
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Talks" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -112,7 +112,6 @@
 
 //Refresh the data in the current hour displayed.  
 //If no current hour set, choose a time with the following rules:
-//  If the current time if between the earliest and latest scheduled talk, use that
 //  If current time < earliest time, use earliest time
 //  Else if current time > latest time, use latest time
 //  Else default to floor of nearst hour (e.g., 10:07 would be 10:00)
