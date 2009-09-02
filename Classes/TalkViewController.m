@@ -31,10 +31,7 @@
 	
 	favButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[favButton setFrame:CGRectMake(25,205,36,36)];
-	UIImage *star;
-	if ([talk favorite]) star = [UIImage imageNamed:@"star_selected.png"];
-	else star = [UIImage imageNamed:@"star_unselected.png"];
-	[favButton setBackgroundImage:star forState:UIControlStateNormal];
+	[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
 	[favButton addTarget:self action:@selector(favoriteButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:favButton];
 }
@@ -54,10 +51,7 @@
 
 - (void)favoriteButtonWasPressed {
 	talk.favorite = !talk.favorite;	
-	UIImage *star;
-	if ([talk favorite]) star = [UIImage imageNamed:@"star_selected.png"];
-	else star = [UIImage imageNamed:@"star_unselected.png"];
-	[favButton setBackgroundImage:star forState:UIControlStateNormal];
+	[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

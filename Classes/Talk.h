@@ -54,5 +54,6 @@
 - (NSDate *)parseTimeString:(NSString *)timeString;
 - (NSString *)startTimeString;
 - (NSString *)endTimeString;
+- (UIImage *)favoriteStatusImage;
 
 @end

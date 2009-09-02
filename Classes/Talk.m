@@ -200,6 +200,11 @@ static NSDate *latestTalk = nil;
 	if (delegate) [delegate favoriteStatusChanged];
 }
 
+- (UIImage *)favoriteStatusImage {
+	NSString *imgName = (favorite ? @"star_selected.png" : @"star_unselected.png");
+	return [UIImage imageNamed:imgName];
+}
+
 - (NSString *)description {
 	NSString *desc = [NSString stringWithFormat:@"Talk: %@ by: %@",name,who];
 	return desc;

@@ -57,8 +57,7 @@ static NSArray *colors = nil;
 }
 
 - (void)setFavoriteImage {
-	NSString *imgName = (talk.favorite ? @"star_selected.png" : @"star_unselected.png");
-	[favButton setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+	[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
 }
 
 //note: since this is a FavoriteChangeDelegate the event will be received 
