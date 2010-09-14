@@ -10,11 +10,12 @@
 #import "Sponsor.h"
 
 @interface SponsorCell : UITableViewCell {
-	IBOutlet UILabel *nameLabel;
-	IBOutlet UILabel *levelLabel;
 	Sponsor *sponsor;
 }
 
 @property (nonatomic, retain) Sponsor *sponsor;
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, retain) IBOutlet UILabel *linkLabel;
+
 
 @end

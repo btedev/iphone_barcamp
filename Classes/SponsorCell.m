@@ -8,11 +8,9 @@
 
 #import "SponsorCell.h"
 
-
 @implementation SponsorCell
 
-@synthesize sponsor;
-
+@synthesize sponsor, nameLabel, linkLabel;
 
 - (void)setSponsor:(Sponsor *)newSponsor {
 	Sponsor *oldSponsor = sponsor;
@@ -20,19 +18,18 @@
 	sponsor = [newSponsor retain];
 	
 	nameLabel.text = sponsor.name;
-	levelLabel.text = sponsor.level;
+	linkLabel.text = sponsor.link;
 }
 
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
 
 - (void)dealloc {
+	[nameLabel release];
+	[linkLabel release];
 	[sponsor release];
     [super dealloc];
 }

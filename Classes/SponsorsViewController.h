@@ -2,18 +2,24 @@
 //  SponsorsViewController.h
 //  BarCamp
 //
-//  Created by Barry Ezell on 8/30/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Barry Ezell on 9/11/10.
+//  Copyright 2010 Dockmarket LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIHTTPRequest.h"
+#import <CoreData/CoreData.h>
+#import "Sponsor.h"
 #import "SponsorCell.h"
 
-@interface SponsorsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-	IBOutlet UITableView *tableView;
-	NSArray *sponsors;
+@interface SponsorsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+
+@private
+    NSFetchedResultsController *fetchedResultsController_;
+    NSManagedObjectContext *managedObjectContext_;	
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (SponsorCell *) createNewSponsorCellFromNib;
 

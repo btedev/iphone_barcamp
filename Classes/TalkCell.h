@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Talk.h"
 
-@interface TalkCell : UITableViewCell <FavoriteChangeDelegate> {
+@interface TalkCell : UITableViewCell {
 	IBOutlet UILabel *roomLabel;
 	IBOutlet UILabel *nameLabel;
 	IBOutlet UILabel *timeLabel;	

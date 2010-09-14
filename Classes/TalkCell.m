@@ -32,14 +32,18 @@ static NSArray *colors = nil;
 	Talk *oldTalk = talk;
 	[oldTalk release];
 	talk = [newTalk retain];
-	talk.delegate = self;
 	
-	nameLabel.text = talk.name;
-	roomLabel.text = talk.room;
-	timeLabel.text = [talk startTimeString];
-	[backgroundColorView setBackgroundColor:[self colorForRoomId:talk.roomId]];
+	nameLabel.text = talk.title;
+	roomLabel.text = talk.roomName;
 	
-	[self setFavoriteImage];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"h:mm a"];
+	timeLabel.text = [formatter stringFromDate:talk.startTime];
+	//[backgroundColorView setBackgroundColor:[self colorForRoomId:talk.objectID]];
+	
+	[formatter release];
+	
+	//[self setFavoriteImage];
 }
 
 //to help differentiate each room, we'll use a simple scheme for assigning a limited selection
@@ -63,7 +67,7 @@ static NSArray *colors = nil;
 //note: since this is a FavoriteChangeDelegate the event will be received 
 //that way which will cause the image to be changed
 - (void)favoriteButtonWasPressed {
-	talk.favorite = !talk.favorite;	
+	//talk.favorite = !talk.favorite;	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {    

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Days</key>
+	<array>
+		<dict>
+			<key>Date</key>
+			<string>2010-09-25</string>
+			<key>Description</key>
+			<string>Media Day</string>
+		</dict>
+		<dict>
+			<key>Date</key>
+			<string>2010-09-26</string>
+			<key>Description</key>
+			<string>Dev Day</string>
+		</dict>
+	</array>
+</dict>
+</plist>
