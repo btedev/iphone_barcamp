@@ -8,17 +8,29 @@
 
 #import "TalksViewController.h"
 #import "BarCampAppDelegate.h"
+#import "TalkViewController.h"
+#import "Reachability.h"
+#import "DDLog.h"
 
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @interface TalksViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
-
 @implementation TalksViewController
 
+@synthesize tableView, currentDay, days;
 @synthesize fetchedResultsController=fetchedResultsController_, managedObjectContext=managedObjectContext_;
 
+- (void)dealloc {
+	[days release];
+	[currentDay release];	
+	[tableView release];
+    [fetchedResultsController_ release];
+    [managedObjectContext_ release];
+    [super dealloc];
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -26,13 +38,65 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	//add left and right buttons.  Note: see README regarding button images.  They are commercial and are not included
+	//in the source posted on github
+	UIButton *rButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	rButton.bounds = CGRectMake(0,0,36,36);
+	[rButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
+	[rButton addTarget:self action:@selector(forwardButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];		
+	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rButton];	
+	self.navigationItem.rightBarButtonItem = rightItem;
+	[rightItem release];
+	
+	UIButton *lButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	lButton.bounds = CGRectMake(0,0,36,36);
+	[lButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+	[lButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];		
+	UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:lButton];
+	self.navigationItem.leftBarButtonItem = leftItem;
+	[leftItem release];	
+	
+	//Get the array of BarCamp days
+	self.days = [Day plistDaysArray];	
+	
+	//Set the current day to the logical date and update the navigation item
+	self.currentDay = [Day logicalDay:days];
+	self.navigationItem.title = self.currentDay.description;
+		
+	//set the MOC
 	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	self.managedObjectContext = delegate.managedObjectContext;
 	
-	//Request Talk to update its collection
-	[Talk refreshTalks];
-}
+	//Check for inet connectivity and raise alert if none, else refresh talks	
+	//(unable to get Reachability working correctly on LAN so skip check when debug)
+	BOOL shouldCheckInet = YES;
+#ifdef DEBUG
+	shouldCheckInet = NO;
+#endif
 
+	Reachability *reachability = [Reachability reachabilityWithHostName:delegate.baseUrlStr];
+	NetworkStatus netStatus = [reachability currentReachabilityStatus];
+	if (netStatus == NotReachable && shouldCheckInet) {			
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Problem" 
+														message:@"Please check your internet connection and try again" 
+													   delegate:nil 
+											  cancelButtonTitle:@"OK" 
+											  otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+	} else {
+		//Request Talk to update its collection
+		[self refreshTalks];		
+	}
+	
+	//Schedule a 120s timer to refresh talks (note: we won't bug user with inet error alerts for 
+	//subsequent request attempts)
+	[NSTimer scheduledTimerWithTimeInterval:120 
+							target:self 
+						  selector:@selector(refreshTalks) 
+						  userInfo:nil 
+						   repeats:YES];
+}
 
 // Implement viewWillAppear: to do additional setup before the view is presented.
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,26 +109,53 @@
     [super viewDidAppear:animated];
 }
 */
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+
+#pragma mark -
+#pragma mark Refresh method
+
+- (void)refreshTalks {
+	DDLogVerbose(@"Refreshing talk schedule");
+	[Talk refreshTalks];
 }
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+
+#pragma mark -
+#pragma day movement methods
+
+- (void)forwardButtonWasPressed {
+	[self dayChangeByIncrement:1];
 }
-*/
+
+- (void)backButtonWasPressed {
+	[self dayChangeByIncrement:-1];
+}
+
+//change days by increment amount 
+//if requested day is available
+- (void)dayChangeByIncrement:(int)incr {
+	
+	//obtain current day index
+	int idx = [self.days indexOfObject:self.currentDay];
+	idx += incr;
+	
+	//change if possible
+	if (idx >= 0 && idx <= [days count] - 1) {
+		self.currentDay = [days objectAtIndex:idx];
+		DDLogInfo(@"Changing day to %@", self.currentDay.description);
+		self.navigationItem.title = self.currentDay.description;
+		
+		fetchedResultsController_ = nil;
+		[self.tableView reloadData];
+	}
+}
+
+#pragma mark -
+#pragma mark Table view data source
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {    
     Talk *talk = (Talk *) [self.fetchedResultsController objectAtIndexPath:indexPath];
     TalkCell *talkCell = (TalkCell *) cell;
 	talkCell.talk = talk;
 }
-
-
-#pragma mark -
-#pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
@@ -78,7 +169,7 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"TalkCell";
     
@@ -123,7 +214,6 @@
     }   
 }
 
-
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // The table view should not be re-orderable.
     return NO;
@@ -134,7 +224,12 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+	TalkViewController *talkVC = [[TalkViewController alloc] initWithNibName:@"TalkViewController" 
+																	 bundle:nil];
+	Talk *talk = (Talk *) [self.fetchedResultsController objectAtIndexPath:indexPath];
+	talkVC.talk = talk;
+	[self.navigationController pushViewController:talkVC animated:YES];
+	[talkVC release];
 }
 
 
@@ -146,6 +241,9 @@
     if (fetchedResultsController_ != nil) {
         return fetchedResultsController_;
     }
+	
+	//avoid nasty crashes for "inconsistent cache"
+	[NSFetchedResultsController deleteCacheWithName:@"Talks"];
     
     /*
      Set up the fetched results controller.
@@ -155,19 +253,25 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Talk" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
+	
+	//Only present results from the currentDay
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"day == %@",self.currentDay.date];
+	[fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startTime" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];    
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+																								managedObjectContext:self.managedObjectContext 
+																								  sectionNameKeyPath:nil 
+																										   cacheName:@"Talks"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -212,9 +316,7 @@
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    UITableView *tableView = self.tableView;
-    
+       
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -255,13 +357,6 @@
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-    [fetchedResultsController_ release];
-    [managedObjectContext_ release];
-    [super dealloc];
 }
 
 

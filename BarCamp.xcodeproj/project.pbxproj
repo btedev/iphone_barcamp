@@ -30,6 +30,7 @@
 		4C42A567123F032B001E27C9 /* SponsorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C42A566123F032B001E27C9 /* SponsorCell.xib */; };
 		4C42A591123F0626001E27C9 /* TalkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C42A590123F0626001E27C9 /* TalkCell.m */; };
 		4C42A593123F0634001E27C9 /* TalkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C42A592123F0634001E27C9 /* TalkCell.xib */; };
+		4C42A746123FC601001E27C9 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C42A745123FC601001E27C9 /* Day.m */; };
 		4C8A09F0123C508D00F378B7 /* Talk.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A09ED123C508D00F378B7 /* Talk.m */; };
 		4C8A09F1123C508D00F378B7 /* Sponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A09EF123C508D00F378B7 /* Sponsor.m */; };
 		4C8A0A20123C514500F378B7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8A0A1F123C514500F378B7 /* CFNetwork.framework */; };
@@ -64,6 +65,14 @@
 		4CBD5C50123BFBCA0080A14F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD5C49123BFBCA0080A14F /* ASINetworkQueue.m */; };
 		4CBD5C53123BFBDD0080A14F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD5C52123BFBDD0080A14F /* Reachability.m */; };
 		4CBD5C59123BFC140080A14F /* SponsorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD5C58123BFC140080A14F /* SponsorCell.m */; };
+		4CCB988C123FCCA8005F97EB /* TalksNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB988A123FCCA8005F97EB /* TalksNavViewController.m */; };
+		4CCB988D123FCCA8005F97EB /* TalksNavViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CCB988B123FCCA8005F97EB /* TalksNavViewController.xib */; };
+		4CE64D0412401FAE00D68CBE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE64D0212401FAE00D68CBE /* Icon.png */; };
+		4CE64D0512401FAE00D68CBE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE64D0312401FAE00D68CBE /* Icon@2x.png */; };
+		4CE64D281240207300D68CBE /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C42A745123FC601001E27C9 /* Day.m */; };
+		4CE64D361240214F00D68CBE /* DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE64D2B124020B000D68CBE /* DayTests.m */; };
+		4CE64E8C12405C6B00D68CBE /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE64E8B12405C6B00D68CBE /* TalkViewController.m */; };
+		4CE64E9012405C7900D68CBE /* TalkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE64E8F12405C7900D68CBE /* TalkViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +115,8 @@
 		4C42A58F123F0626001E27C9 /* TalkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkCell.h; sourceTree = "<group>"; };
 		4C42A590123F0626001E27C9 /* TalkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkCell.m; sourceTree = "<group>"; };
 		4C42A592123F0634001E27C9 /* TalkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TalkCell.xib; sourceTree = "<group>"; };
+		4C42A744123FC601001E27C9 /* Day.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Day.h; sourceTree = "<group>"; };
+		4C42A745123FC601001E27C9 /* Day.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Day.m; sourceTree = "<group>"; };
 		4C8A09EC123C508D00F378B7 /* Talk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Talk.h; path = ../Talk.h; sourceTree = "<group>"; };
 		4C8A09ED123C508D00F378B7 /* Talk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Talk.m; path = ../Talk.m; sourceTree = "<group>"; };
 		4C8A09EE123C508D00F378B7 /* Sponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sponsor.h; path = ../Sponsor.h; sourceTree = "<group>"; };
@@ -165,6 +176,18 @@
 		4CBD5C52123BFBDD0080A14F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		4CBD5C57123BFC140080A14F /* SponsorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorCell.h; sourceTree = "<group>"; };
 		4CBD5C58123BFC140080A14F /* SponsorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorCell.m; sourceTree = "<group>"; };
+		4CCB9889123FCCA8005F97EB /* TalksNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalksNavViewController.h; sourceTree = "<group>"; };
+		4CCB988A123FCCA8005F97EB /* TalksNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalksNavViewController.m; sourceTree = "<group>"; };
+		4CCB988B123FCCA8005F97EB /* TalksNavViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TalksNavViewController.xib; path = Classes/TalksNavViewController.xib; sourceTree = "<group>"; };
+		4CE64D0212401FAE00D68CBE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		4CE64D0312401FAE00D68CBE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		4CE64D1D1240202C00D68CBE /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE64D1E1240202C00D68CBE /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
+		4CE64D2A124020B000D68CBE /* DayTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTests.h; sourceTree = "<group>"; };
+		4CE64D2B124020B000D68CBE /* DayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTests.m; sourceTree = "<group>"; };
+		4CE64E8A12405C6B00D68CBE /* TalkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkViewController.h; sourceTree = "<group>"; };
+		4CE64E8B12405C6B00D68CBE /* TalkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkViewController.m; sourceTree = "<group>"; };
+		4CE64E8F12405C7900D68CBE /* TalkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TalkViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* BarCamp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BarCamp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,6 +207,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CE64D1A1240202C00D68CBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -191,14 +221,11 @@
 			isa = PBXGroup;
 			children = (
 				4CBD5BCC123BF25A0080A14F /* Models */,
-				4C8A09EC123C508D00F378B7 /* Talk.h */,
-				4C8A09ED123C508D00F378B7 /* Talk.m */,
-				4C8A09EE123C508D00F378B7 /* Sponsor.h */,
-				4C8A09EF123C508D00F378B7 /* Sponsor.m */,
 				4CBD5BCD123BF2600080A14F /* Views */,
 				4CBD5BCE123BF2660080A14F /* Controllers */,
 				4CBD5BCF123BF27B0080A14F /* External */,
 				4CBD5BD0123BF2880080A14F /* Other */,
+				4CE64D291240208F00D68CBE /* Unit Tests */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -207,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* BarCamp.app */,
+				4CE64D1D1240202C00D68CBE /* UnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +247,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				4CE64D1E1240202C00D68CBE /* UnitTests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -235,15 +264,17 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4C8A0A7D123C66ED00F378B7 /* Images */,
+				8D1107310486CEB800E47090 /* BarCamp-Info.plist */,
 				28D3F201112F7DC200FD0661 /* BarCamp.xcdatamodeld */,
+				4C8A0A5B123C63BA00F378B7 /* Days.plist */,
+				4C8A0A7D123C66ED00F378B7 /* Images */,
 				4CBD5C0A123BF6710080A14F /* MainWindow.xib */,
 				4C42A566123F032B001E27C9 /* SponsorCell.xib */,
 				4CBD5C0D123BF6930080A14F /* SponsorsViewController.xib */,
 				4C42A592123F0634001E27C9 /* TalkCell.xib */,
+				4CCB988B123FCCA8005F97EB /* TalksNavViewController.xib */,
 				2899E55F0DE3E45000AC0155 /* TalksViewController.xib */,
-				8D1107310486CEB800E47090 /* BarCamp-Info.plist */,
-				4C8A0A5B123C63BA00F378B7 /* Days.plist */,
+				4CE64E8F12405C7900D68CBE /* TalkViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -303,6 +334,8 @@
 		4C8A0A7D123C66ED00F378B7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4CE64D0212401FAE00D68CBE /* Icon.png */,
+				4CE64D0312401FAE00D68CBE /* Icon@2x.png */,
 				4C8A0A7E123C670200F378B7 /* back.png */,
 				4C8A0A7F123C670200F378B7 /* calendar.png */,
 				4C8A0A80123C670200F378B7 /* forward.png */,
@@ -316,6 +349,12 @@
 		4CBD5BCC123BF25A0080A14F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4C42A744123FC601001E27C9 /* Day.h */,
+				4C42A745123FC601001E27C9 /* Day.m */,
+				4C8A09EC123C508D00F378B7 /* Talk.h */,
+				4C8A09ED123C508D00F378B7 /* Talk.m */,
+				4C8A09EE123C508D00F378B7 /* Sponsor.h */,
+				4C8A09EF123C508D00F378B7 /* Sponsor.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -334,10 +373,14 @@
 		4CBD5BCE123BF2660080A14F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				28C286DF0D94DF7D0034E888 /* TalksViewController.h */,
-				28C286E00D94DF7D0034E888 /* TalksViewController.m */,
 				4C8A0A7A123C664F00F378B7 /* SponsorsViewController.h */,
 				4C8A0A7B123C664F00F378B7 /* SponsorsViewController.m */,
+				4CCB9889123FCCA8005F97EB /* TalksNavViewController.h */,
+				4CCB988A123FCCA8005F97EB /* TalksNavViewController.m */,
+				28C286DF0D94DF7D0034E888 /* TalksViewController.h */,
+				28C286E00D94DF7D0034E888 /* TalksViewController.m */,
+				4CE64E8A12405C6B00D68CBE /* TalkViewController.h */,
+				4CE64E8B12405C6B00D68CBE /* TalkViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -422,6 +465,15 @@
 			name = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
+		4CE64D291240208F00D68CBE /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4CE64D2A124020B000D68CBE /* DayTests.h */,
+				4CE64D2B124020B000D68CBE /* DayTests.m */,
+			);
+			name = "Unit Tests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -442,6 +494,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* BarCamp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4CE64D1C1240202C00D68CBE /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CE64D221240202D00D68CBE /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				4CE64D181240202C00D68CBE /* Resources */,
+				4CE64D191240202C00D68CBE /* Sources */,
+				4CE64D1A1240202C00D68CBE /* Frameworks */,
+				4CE64D1B1240202C00D68CBE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 4CE64D1D1240202C00D68CBE /* UnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -449,6 +519,7 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BarCamp" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -462,6 +533,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* BarCamp */,
+				4CE64D1C1240202C00D68CBE /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -484,10 +556,37 @@
 				4C42A4D9123EE90F001E27C9 /* LICENSE in Resources */,
 				4C42A567123F032B001E27C9 /* SponsorCell.xib in Resources */,
 				4C42A593123F0634001E27C9 /* TalkCell.xib in Resources */,
+				4CCB988D123FCCA8005F97EB /* TalksNavViewController.xib in Resources */,
+				4CE64D0412401FAE00D68CBE /* Icon.png in Resources */,
+				4CE64D0512401FAE00D68CBE /* Icon@2x.png in Resources */,
+				4CE64E9012405C7900D68CBE /* TalkViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CE64D181240202C00D68CBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4CE64D1B1240202C00D68CBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -530,6 +629,18 @@
 				4C42A524123EF44B001E27C9 /* DDLog.m in Sources */,
 				4C42A525123EF44B001E27C9 /* DDTTYLogger.m in Sources */,
 				4C42A591123F0626001E27C9 /* TalkCell.m in Sources */,
+				4C42A746123FC601001E27C9 /* Day.m in Sources */,
+				4CCB988C123FCCA8005F97EB /* TalksNavViewController.m in Sources */,
+				4CE64E8C12405C6B00D68CBE /* TalkViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CE64D191240202C00D68CBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CE64D281240207300D68CBE /* Day.m in Sources */,
+				4CE64D361240214F00D68CBE /* DayTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +674,64 @@
 			};
 			name = Release;
 		};
+		4CE64D201240202D00D68CBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "UnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = UnitTests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4CE64D211240202D00D68CBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "UnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = UnitTests;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -572,8 +741,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Debug;
 		};
@@ -599,6 +769,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CE64D221240202D00D68CBE /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CE64D201240202D00D68CBE /* Debug */,
+				4CE64D211240202D00D68CBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

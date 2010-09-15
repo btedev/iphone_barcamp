@@ -16,26 +16,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation Talk 
 
 @dynamic roomName;
+@dynamic roomId;
 @dynamic speaker;
 @dynamic endTime;
 @dynamic notes;
 @dynamic title;
+@dynamic day;
 @dynamic startTime;
 @dynamic serverId;
 @dynamic updatedAt;
 
-/*[{"talk": {"room_id": 1, "name": "Connecting print and the digital world", "end_time": "2000-01-01T09:55:00Z", "created_at": "2009-09-26T13:23:22Z", "updated_at": "2009-09-26T13:23:35Z", "deleted_at": null, "url": "", "id": 2, "day": "2010-09-25", "who": "Steve Tingiris + Jody Haneke", "description": "", "start_time": "2000-01-01T09:30:00Z"}}, {"talk": {"room_id": 1, "name": "Web Hooks", "end_time": "2000-01-01T10:25:00Z", "created_at": "2009-09-26T13:24:03Z", "updated_at": "2009-09-26T13:24:03Z", "deleted_at": null, "url": "", "id": 3, "day": "2010-09-25", "who": "@ryantxr", "description": "", "start_time": "2000-01-01T10:00:00Z"}}, {"talk": {"room_id": 1, "name": "iPhone Developer Secrets = a Panel", "end_time": "2000-01-01T13:55:00Z", "created_at": "2009-09-26T13:24:30Z", "updated_at": "2009-09-26T13:31:51Z", "deleted_at": null, "url": "", "id": 4, "day": "2010-09-25", "who": "Tampa iPhone Developers", "description": "", "start_time": "2000-01-01T13:00:00Z"}}, {"talk": {"room_id": 1, "name": "Tampa Bay Microcontroller + Robotics Group", "end_time": "2000-01-01T14:25:00Z", "created_at": "2009-09-26T13:24:57Z", "updated_at": "2009-09-26T13:32:01Z", "deleted_at": null, "url": "", "id": 5, "day": "2010-09-25", "who": "", "description": "", "start_time": "2000-01-01T14:00:00Z"}}, {"talk": {"room_id": 1, "name": "Future of programming from the perspective of the microcontroller", "end_time": "2000-01-01T14:55:00Z", "created_at": "2009-09-26T13:25:39Z", "updated_at": "2009-09-26T13:32:14Z", "deleted_at": null, "url": "", "id": 6, "day": "2010-09-25", "who": "", "description": "NULL", "start_time": "2000-01-01T14:30:00Z"}}, {"talk": {"room_id": 1, "name": "Open Discussion on Hacker Spaces", "end_time": "2000-01-01T15:55:00Z", "created_at": "2009-09-26T13:25:58Z", "updated_at": "2009-09-26T13:32:27Z", "deleted_at": null, "url": "", "id": 7, "day": "2010-09-25", "who": "", "description": "", "start_time": "2000-01-01T15:00:00Z"}}, {"talk": {"room_id": 2, "name": "Beginning iPhone Development", "end_time": "2000-01-01T10:15:00Z", "created_at": "2009-09-26T13:33:20Z", "updated_at": "2009-09-26T13:33:20Z", "deleted_at": null, "url": "", "id": 8, "day": "2010-09-25", "who": "NULL", "description": "", "start_time": "2000-01-01T09:30:00Z"}}, {"talk": {"room_id": 2, "name": "Adobe Flash Platform (Intro + Resources)", "end_time": "2000-01-01T11:35:00Z", "created_at": "2009-09-26T13:33:54Z", "updated_at": "2009-09-26T13:33:54Z", "deleted_at": null, "url": "", "id": 9, "day": "2010-09-25", "who": "Greg Wilson", "description": "", "start_time": "2000-01-01T10:30:00Z"}}, {"talk": {"room_id": 2, "name": "RSS Could", "end_time": "2000-01-01T12:00:00Z", "created_at": "2009-09-26T13:37:22Z", "updated_at": "2009-09-26T13:37:22Z", "deleted_at": null, "url": "", "id": 10, "day": "2010-09-25", "who": "Chuck Palm", "description": "", "start_time": "2000-01-01T11:35:00Z"}}, {"talk": {"room_id": 2, "name": "Augmented Reality", "end_time": "2000-01-01T14:05:00Z", "created_at": "2009-09-26T13:37:51Z", "updated_at": "2009-09-26T13:37:51Z", "deleted_at": null, "url": "", "id": 11, "day": "2010-09-25", "who": "Sean Carey", "description": "", "start_time": "2000-01-01T13:00:00Z"}}]
- */
-
 + (void)refreshTalks {
 	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];	
-	DDLogVerbose(@"%@",delegate.baseUrlStr);
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",delegate.baseUrlStr,@"talks.json"]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@",delegate.baseUrlStr,@"talks.json"]];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
 	[request startAsynchronous];
 }
-
 
 + (void)requestFinished:(ASIHTTPRequest *)request {
 	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
@@ -94,6 +91,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	self.serverId = [dict objectForKey:@"id"];
 	self.title = [dict objectForKey:@"name"];
 	
+	if ([dict objectForKey:@"room_id"] != [NSNull null]) {
+		self.roomId = [dict objectForKey:@"room_id"];
+	}
+	
 	if ([dict objectForKey:@"room_name"] != [NSNull null]) {
 		self.roomName = [dict objectForKey:@"room_name"];	
 	}
@@ -102,18 +103,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 		self.speaker = [dict objectForKey:@"who"];
 	}
 	
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+	NSDateFormatter *fmtLong = [[NSDateFormatter alloc] init];
+	[fmtLong setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+	NSDateFormatter *fmtShort =[[NSDateFormatter alloc] init];
+	[fmtShort setDateFormat:@"yyyy-MM-dd"];
+	
+	NSString *dayStr = [dict objectForKey:@"day"];
+	self.day = [fmtShort dateFromString:dayStr];
 	
 	NSString *sTime = [dict objectForKey:@"start_time"];				
-	self.startTime = [formatter dateFromString:sTime];
+	self.startTime = [fmtLong dateFromString:sTime];
 	
 	if ([dict objectForKey:@"end_time"] != [NSNull null]) {
 		NSString *eTime = [dict objectForKey:@"end_time"];
-		self.endTime = [formatter dateFromString:eTime];	
+		self.endTime = [fmtLong dateFromString:eTime];	
 	}
 	
-	[formatter release];
+	[fmtLong release];
+	[fmtShort release];
 	
 	self.updatedAt = [NSDate date];
 }
+
+@end

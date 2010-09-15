@@ -23,7 +23,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 + (void)refreshSponsors {
 	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];	
 	DDLogVerbose(@"%@",delegate.baseUrlStr);
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",delegate.baseUrlStr,@"sponsors.json"]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@",delegate.baseUrlStr,@"sponsors.json"]];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
 	[request startAsynchronous];

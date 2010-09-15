@@ -15,10 +15,12 @@
 }
 
 @property (nonatomic, retain) NSString * roomName;
+@property (nonatomic, retain) NSNumber *roomId;
 @property (nonatomic, retain) NSString * speaker;
 @property (nonatomic, retain) NSDate * endTime;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSDate *day;
 @property (nonatomic, retain) NSDate * startTime;
 @property (nonatomic, retain) NSNumber *serverId;
 @property (nonatomic, retain) NSDate *updatedAt;

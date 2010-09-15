@@ -10,17 +10,25 @@
 #import <CoreData/CoreData.h>
 #import "Talk.h"
 #import "TalkCell.h"
+#import "Day.h"
 
-@interface TalksViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-
+@interface TalksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate> {
+	
 @private
     NSFetchedResultsController *fetchedResultsController_;
     NSManagedObjectContext *managedObjectContext_;
 }
 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) Day *currentDay;
+@property (nonatomic, retain) NSArray *days;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (TalkCell *) createNewTalkCellFromNib;
+- (void)forwardButtonWasPressed;
+- (void)backButtonWasPressed;
+- (void)dayChangeByIncrement:(int)incr;
+- (void)refreshTalks;
 
 @end

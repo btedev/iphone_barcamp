@@ -27,15 +27,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
+	[application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+	
 	//setup cocoa lumberjack for logging
 	[DDLog addLogger:[DDASLLogger sharedInstance]];
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
 		
-    //set the base URL for all requests
+    //set the base URL hostname for all requests
 #ifdef DEBUG
-	self.baseUrlStr = @"http://127.0.0.1:3000";
+	self.baseUrlStr = @"192.168.1.53:3000";
 #else
-	self.baseUrlStr = @"http://barcamptampabayapi.org";
+	self.baseUrlStr = @"barcamptampabayapi.org";
 #endif
 	
 	DDLogVerbose(@"Base URL: %@",baseUrlStr);	

@@ -16,9 +16,8 @@ static NSArray *colors = nil;
 
 //Using Kuler color set based on "Ocean" by papapac
 + (void)createColorArray {
-	NSMutableArray *tmpColors = [NSMutableArray arrayWithCapacity:5];
+	NSMutableArray *tmpColors = [NSMutableArray array];
 		
-	[tmpColors addObject:[UIColor colorWithRed:0.0470 green:0.1176 blue:0.9098 alpha:1.0]];
 	[tmpColors addObject:[UIColor colorWithRed:0.0 green:0.6039 blue:1.0 alpha:1.0]];
 	[tmpColors addObject:[UIColor colorWithRed:0.0 green:1.0 blue:0.3019 alpha:1.0]];
 	[tmpColors addObject:[UIColor colorWithRed:0.4549 green:0.0 blue:1.0 alpha:1.0]];	
@@ -39,8 +38,9 @@ static NSArray *colors = nil;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"h:mm a"];
 	timeLabel.text = [formatter stringFromDate:talk.startTime];
-	//[backgroundColorView setBackgroundColor:[self colorForRoomId:talk.objectID]];
-	
+	roomLabel.text = talk.roomName;
+	roomLabel.textColor = [self colorForRoomId:[talk.roomId intValue]];
+		
 	[formatter release];
 	
 	//[self setFavoriteImage];
@@ -49,7 +49,7 @@ static NSArray *colors = nil;
 //to help differentiate each room, we'll use a simple scheme for assigning a limited selection
 //of colors by id
 - (UIColor *)colorForRoomId:(int)rId {		
-	int i = (rId % 5);	
+	int i = (rId % 4);	
 	if (!colors) [TalkCell createColorArray];			
 	return [colors objectAtIndex:i];	
 }
