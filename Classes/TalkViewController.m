@@ -1,4 +1,4 @@
-//
+ //
 //  TalkViewController.m
 //  BarCamp
 //
@@ -8,13 +8,18 @@
 
 #import "TalkViewController.h"
 
-
 @implementation TalkViewController
 
-@synthesize talk;
+@synthesize talkVCDelegate, talk, whatLabel, whoLabel, whereLabel, whenLabel, interestedButton, twitterButton;
 
-- (void)dealloc {
+- (void)dealloc {	
 	[talk release];
+	[whatLabel release];
+	[whoLabel release];
+	[whereLabel release];
+	[whenLabel release];
+	[interestedButton release];
+	[twitterButton release];
     [super dealloc];
 }
 
@@ -27,16 +32,24 @@
 						withText:talk.title];		 
 	whoLabel.text = talk.speaker;	
 	whereLabel.text = talk.roomName;
-			
-	//whenLabel.text = [NSString stringWithFormat:@"%@ - %@",[talk startTimeString],[talk endTimeString]];
 	
-	/*
-	favButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[favButton setFrame:CGRectMake(25,205,36,36)];
-	[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
-	[favButton addTarget:self action:@selector(favoriteButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:favButton];
-	 */
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"h:mm a"];
+	NSString *sString = [formatter stringFromDate:talk.startTime];
+	NSString *eString = (talk.endTime ? [formatter stringFromDate:talk.endTime] : nil);
+	NSString *timeString = (eString ? [NSString stringWithFormat:@"%@ - %@",sString,eString] : sString);	
+	[formatter release];
+	whenLabel.text = timeString;		
+	
+	//enable the twitter button if the speaker's name begins with an @
+	//(button in xib is disabled with alpha == 1.0)
+	if ([talk.speaker length] > 0 && [[talk.speaker substringToIndex:1] isEqualToString:@"@"]) {
+		self.twitterButton.enabled = YES;
+	} else {
+		self.twitterButton.alpha = 0.0;
+	}
+	
+	[self setInterestedButtonImage];
 }
 
 //UILabel has property for HAlign but not VAlign and defaults to centered.  This will adjust VAlign by just
@@ -52,22 +65,33 @@
 	myLabel.text = theText;
 }
 
-- (void)favoriteButtonWasPressed {
-	//talk.favorite = !talk.favorite;	
-	//[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+- (void)interestedButtonWasPressed {
+	if ([talk.interestLevel intValue] == 0) {
+		talk.interestLevel = [NSNumber numberWithInt:1];
+	} else {
+		talk.interestLevel = [NSNumber numberWithInt:0];
+	}
 	
-	// Release any cached data, images, etc that aren't in use.
+	[self setInterestedButtonImage];
+	
+	//persist changes now
+	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];	
+	NSError *error = nil;
+	if ([context hasChanges]) {
+		if(![context save:&error]) {
+			DLog(@"Failed to save talk to data store: %@", [error localizedDescription]);
+		}
+	}	
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+- (void)setInterestedButtonImage {
+	NSString *imgName = ([talk.interestLevel intValue] == 1 ? @"checkButtonInterested.png" : @"checkButtonNotInterested.png");		
+	[self.interestedButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
 }
 
+- (void)twitterButtonWasPressed {
+	NSString *profileString = [NSString stringWithFormat:@"http://twitter.com/%@",[self.talk.speaker substringFromIndex:1]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:profileString]];
+}
 
 @end

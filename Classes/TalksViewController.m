@@ -10,9 +10,7 @@
 #import "BarCampAppDelegate.h"
 #import "TalkViewController.h"
 #import "Reachability.h"
-#import "DDLog.h"
-
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#import "MBProgressHUD.h"
 
 @interface TalksViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -65,18 +63,44 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 		
 	//set the MOC
 	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-	self.managedObjectContext = delegate.managedObjectContext;
+	self.managedObjectContext = delegate.managedObjectContext;	
 	
+	//Schedule a timer to refresh talks (note: we won't bug user with inet error alerts for 
+	//subsequent request attempts)
+	[NSTimer scheduledTimerWithTimeInterval:90
+									 target:self 
+								   selector:@selector(refreshTalks) 
+								   userInfo:nil 
+									repeats:YES];
+	
+	//display a HUD while the web service is queried for the first time
+	HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.delegate = self;	
+    HUD.labelText = @"Updating";
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(performInitialTalkRequest) onTarget:self withObject:nil animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	suspendingUpdates = NO;
+}
+
+- (void)performInitialTalkRequest {
 	//Check for inet connectivity and raise alert if none, else refresh talks	
 	//(unable to get Reachability working correctly on LAN so skip check when debug)
 	BOOL shouldCheckInet = YES;
 #ifdef DEBUG
 	shouldCheckInet = NO;
 #endif
-
+	
+	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	Reachability *reachability = [Reachability reachabilityWithHostName:delegate.baseUrlStr];
 	NetworkStatus netStatus = [reachability currentReachabilityStatus];
-	if (netStatus == NotReachable && shouldCheckInet) {			
+	if (netStatus == NotReachable && shouldCheckInet) {	
+		DLog(@"Could not reach server");
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Problem" 
 														message:@"Please check your internet connection and try again" 
 													   delegate:nil 
@@ -88,34 +112,18 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 		//Request Talk to update its collection
 		[self refreshTalks];		
 	}
-	
-	//Schedule a 120s timer to refresh talks (note: we won't bug user with inet error alerts for 
-	//subsequent request attempts)
-	[NSTimer scheduledTimerWithTimeInterval:120 
-							target:self 
-						  selector:@selector(refreshTalks) 
-						  userInfo:nil 
-						   repeats:YES];
 }
-
-// Implement viewWillAppear: to do additional setup before the view is presented.
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
 
 #pragma mark -
 #pragma mark Refresh method
 
 - (void)refreshTalks {
-	DDLogVerbose(@"Refreshing talk schedule");
-	[Talk refreshTalks];
+	if (!suspendingUpdates) {
+		@synchronized(self) {
+			DLog(@"Refreshing talk schedule");
+			[Talk refreshTalks];
+		}
+	}
 }
 
 #pragma mark -
@@ -140,10 +148,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	//change if possible
 	if (idx >= 0 && idx <= [days count] - 1) {
 		self.currentDay = [days objectAtIndex:idx];
-		DDLogInfo(@"Changing day to %@", self.currentDay.description);
+		DLog(@"Changing day to %@", self.currentDay.description);
 		self.navigationItem.title = self.currentDay.description;
 		
 		fetchedResultsController_ = nil;
+		self.fetchedResultsController = nil;
 		[self.tableView reloadData];
 	}
 }
@@ -223,7 +232,16 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #pragma mark -
 #pragma mark Table view delegate
 
+//Push the detail view for the Talk
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	//While the TalkViewController is visible, we will suspend updates from the web service
+	//because FetchedResultsController will throw a nasty exception if an insert or delete
+	//occurs in the underlying data while a given cell's data is in an update.  
+	//To replicate this error, comment out "suspendingUpdates" lines throughout class, select a talk,
+	//toggle its "interested" button, insert/delete a row on the server and wait for a refresh locally,
+	//then navigate back to this VC. 
+	suspendingUpdates = YES;
+	
 	TalkViewController *talkVC = [[TalkViewController alloc] initWithNibName:@"TalkViewController" 
 																	 bundle:nil];
 	Talk *talk = (Talk *) [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -262,8 +280,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startTime" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];    
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startTime" ascending:YES];
+	NSSortDescriptor *roomSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"roomName" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:timeSortDescriptor, roomSortDescriptor, nil];    
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
@@ -277,12 +296,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     [aFetchedResultsController release];
     [fetchRequest release];
-    [sortDescriptor release];
+    [timeSortDescriptor release];
+	[roomSortDescriptor release];
     [sortDescriptors release];
     
     NSError *error = nil;
     if (![fetchedResultsController_ performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
     
     return fetchedResultsController_;
@@ -338,9 +358,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }
 }
 
-
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
+	[self.tableView endUpdates];
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
 }
 
 #pragma mark -

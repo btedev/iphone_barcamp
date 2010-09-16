@@ -12,7 +12,16 @@ static NSArray *colors = nil;
 
 @implementation TalkCell
 
-@synthesize talk, favButton, backgroundColorView;
+@synthesize talk, roomLabel, timeLabel, nameLabel, checkImageView;
+
+- (void)dealloc {
+	[talk release];
+	[timeLabel release];
+	[nameLabel release];
+	[roomLabel release];
+	[checkImageView release];	
+    [super dealloc];
+}
 
 //Using Kuler color set based on "Ocean" by papapac
 + (void)createColorArray {
@@ -43,7 +52,8 @@ static NSArray *colors = nil;
 		
 	[formatter release];
 	
-	//[self setFavoriteImage];
+	//show or hide the checkmark depending on whether this talk is "interesting"
+	self.checkImageView.alpha = ([talk.interestLevel intValue] == 1 ? 1.0 : 0.0);	
 }
 
 //to help differentiate each room, we'll use a simple scheme for assigning a limited selection
@@ -53,37 +63,5 @@ static NSArray *colors = nil;
 	if (!colors) [TalkCell createColorArray];			
 	return [colors objectAtIndex:i];	
 }
-
-#pragma mark FavoriteChangeDelegate method
-
-- (void)favoriteStatusChanged {
-	[self setFavoriteImage];
-}
-
-- (void)setFavoriteImage {
-	[favButton setBackgroundImage:[talk favoriteStatusImage] forState:UIControlStateNormal];
-}
-
-//note: since this is a FavoriteChangeDelegate the event will be received 
-//that way which will cause the image to be changed
-- (void)favoriteButtonWasPressed {
-	//talk.favorite = !talk.favorite;	
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {    
-	//[super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-	//[self bringSubviewToFront:favButton];
-}
-
-
-- (void)dealloc {
-	[talk release];
-	[favButton release];
-	[backgroundColorView release];
-    [super dealloc];
-}
-
 
 @end

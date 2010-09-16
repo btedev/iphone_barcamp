@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber *roomId;
 @property (nonatomic, retain) NSString * speaker;
 @property (nonatomic, retain) NSDate * endTime;
+@property (nonatomic, retain) NSNumber *interestLevel;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate *day;

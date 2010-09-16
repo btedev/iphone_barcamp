@@ -21,11 +21,30 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	
+    [super viewDidLoad];	
 	[self.view addSubview:[navigationController view]];
 }
 
+//see http://davidebenini.it/2009/01/03/viewwillappear-not-being-called-inside-a-uinavigationcontroller/
+-(void)viewWillAppear:(BOOL)animated { 
+	[super viewWillAppear:animated];
+	[navigationController viewWillAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated { 
+	[super viewWillDisappear:animated];
+	[navigationController viewWillDisappear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated { 
+	[super viewDidAppear:animated];
+	[navigationController viewDidAppear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated { 
+	[super viewDidDisappear:animated];
+	[navigationController viewDidDisappear:animated];
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

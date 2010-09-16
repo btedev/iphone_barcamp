@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "MBProgressHUD.h"
 #import "Talk.h"
 #import "TalkCell.h"
 #import "Day.h"
 
-@interface TalksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate> {
+@interface TalksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, MBProgressHUDDelegate> {
+	
+	MBProgressHUD *HUD;
+	BOOL suspendingUpdates;
 	
 @private
     NSFetchedResultsController *fetchedResultsController_;
@@ -25,6 +29,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
+- (void)performInitialTalkRequest;
 - (TalkCell *) createNewTalkCellFromNib;
 - (void)forwardButtonWasPressed;
 - (void)backButtonWasPressed;

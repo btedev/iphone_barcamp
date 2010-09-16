@@ -9,9 +9,6 @@
 #import "Talk.h"
 #import "BarCampAppDelegate.h"
 #import "CJSONDeserializer.h"
-#import "DDLog.h"
-
-static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation Talk 
 
@@ -19,6 +16,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @dynamic roomId;
 @dynamic speaker;
 @dynamic endTime;
+@dynamic interestLevel;
 @dynamic notes;
 @dynamic title;
 @dynamic day;
@@ -37,48 +35,75 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 + (void)requestFinished:(ASIHTTPRequest *)request {
 	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
 	NSString *responseString = [request responseString];
-	DDLogVerbose(@"%@",responseString);
+	//DLog(@"%@",responseString);
 		
 	NSData *jsonData = [responseString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *error = nil;
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 		
 	NSDictionary *dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
 	if ([dictionary objectForKey:@"talks"]) {
 		NSArray *talks = [dictionary objectForKey:@"talks"];
 		for (NSDictionary *talk in talks) {			
 			NSDictionary *innerDict = [talk valueForKey:@"talk"];
+			BOOL isDeleted = ([innerDict objectForKey:@"deleted_at"] == [NSNull null] ? NO : YES);
 			
 			//check for existing talk with same serverId
 			NSNumber *serverId = [innerDict objectForKey:@"id"];
-			Talk *tTest = [Talk findFirstByAttribute:@"serverId" withValue:serverId];
+			Talk *tLocal = [Talk findFirstByAttribute:@"serverId" withValue:serverId];
 			
-			if (!tTest) {
+			//three conditions on which we'll act
+			//1.  Talk that's not present in CD and is not deleted on the server (create)			
+			//2.  Talk that's present and deleted on the server (delete)
+			//3.  Talk that's present in CD and was updated before the server object (update)
+			if (!tLocal && !isDeleted) {
 				@try {
 					[Talk createInstance:innerDict];
 				}
 				@catch (NSException * e) {
-					DDLogError(@"Error creating talk: %@",innerDict);
-				}				
-									
-			}//existing Talk test
+					DLog(@"Error creating talk: %@",innerDict);
+				}								
+			} else if (tLocal && isDeleted) {
+				//delete local file
+				DLog(@"Deleting local talk %@ to reflect server delete",tLocal.title);
+				[context deleteObject:tLocal];
+			} else if (tLocal) {
+				//compare updatedAt values and possibly update
+				NSDate *serverUpdated = [formatter dateFromString:[innerDict objectForKey:@"updated_at"]];
+				
+				//TODO: fix this awful TZ hack
+				//some issues: formatter won't work as is if Rails is set to use a non-UTC TZ,
+				//this hack assumes the server is two hours ahead of the phone even though they both insist they're "GMT" #fml
+				NSTimeInterval secondsInFourHours = -4 * 60 * 60;
+				serverUpdated = [serverUpdated dateByAddingTimeInterval:secondsInFourHours];
+				
+				if ([tLocal.updatedAt compare:serverUpdated] == NSOrderedAscending) {
+					DLog(@"Updating local talk with updateAt: %@ to match server talk with updatedAt: %@",tLocal.updatedAt,serverUpdated);
+					[tLocal populateFromDictionary:innerDict];
+				} 
+			}
 		}//talks loop
 	}//json sanity test
 	
 	if ([context hasChanges]) {
 		if(![context save:&error]) {
-			DDLogError(@"Failed to save talk to data store: %@", [error localizedDescription]);
+			DLog(@"Failed to save talk to data store: %@", [error localizedDescription]);
 		}
 	}
+	
+	[formatter release];
 }
 
 + (void)requestFailed:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
-	DDLogVerbose(@"Talk request failed: %@",[error localizedDescription]);
+	DLog(@"Talk request failed: %@",[error localizedDescription]);
 }
 
 //Create Talk instance from a NSDictionary
 + (Talk *)createInstance:(NSDictionary *)dict {
-	DDLogInfo(@"Adding talk %@",[dict objectForKey:@"name"]);
+	DLog(@"Adding talk %@",[dict objectForKey:@"name"]);
 	Talk *talk = [NSEntityDescription insertNewObjectForEntityForName:@"Talk" 
 											   inManagedObjectContext:[NSManagedObjectContext defaultContext]];
 	

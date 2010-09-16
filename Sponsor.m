@@ -9,9 +9,6 @@
 #import "Sponsor.h"
 #import "BarCampAppDelegate.h"
 #import "CJSONDeserializer.h"
-#import "DDLog.h"
-
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation Sponsor 
 
@@ -22,7 +19,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 //of persisted Sponsor objects in requestFinished:
 + (void)refreshSponsors {
 	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];	
-	DDLogVerbose(@"%@",delegate.baseUrlStr);
+	DLog(@"%@",delegate.baseUrlStr);
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@",delegate.baseUrlStr,@"sponsors.json"]];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
@@ -32,7 +29,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 + (void)requestFinished:(ASIHTTPRequest *)request {
 	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
 	NSString *responseString = [request responseString];
-	DDLogVerbose(@"%@",responseString);
+	//DLog(@"%@",responseString);
 		
 	NSData *jsonData = [responseString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *error = nil;
@@ -48,7 +45,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 			Sponsor *sTest = [Sponsor findFirstByAttribute:@"name" withValue:[innerDict objectForKey:@"name"]];
 			
 			if (!sTest) {
-				DDLogInfo(@"Adding sponsor %@",[innerDict objectForKey:@"name"]);				
+				DLog(@"Adding sponsor %@",[innerDict objectForKey:@"name"]);				
 				Sponsor *sNew = [NSEntityDescription insertNewObjectForEntityForName:@"Sponsor" 
 															  inManagedObjectContext:context];
 				sNew.name = [innerDict objectForKey:@"name"];
@@ -60,14 +57,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	
 	if (newObjects) {
 		if(![context save:&error]) {
-			DDLogError(@"Failed to save to data store: %@", [error localizedDescription]);
+			DLog(@"Failed to save to data store: %@", [error localizedDescription]);
 		}
 	}
 }
 
 + (void)requestFailed:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
-	DDLogVerbose(@"Sponsor request failed: %@",[error localizedDescription]);
+	DLog(@"Sponsor request failed: %@",[error localizedDescription]);
 }
 
 @end

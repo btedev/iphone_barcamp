@@ -15,5 +15,15 @@
     #import <CoreData/CoreData.h>
 #endif
 
+
+// Debug logging function
+//Substitute DLog for any DLog.  When not DEBUG, calls aren't executed
+#ifdef DEBUG
+#    define DLog(...) NSLog(__VA_ARGS__)
+#else
+#    define DLog(...) while(0)
+#endif
+
+
 //For ActiveRecord
 #define DB_FILE_NAME @"BarCamp.sqlite"

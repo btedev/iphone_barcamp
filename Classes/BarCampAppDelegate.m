@@ -7,12 +7,9 @@
 //
 
 #import "BarCampAppDelegate.h"
+#import "TalksNavViewController.h"
+#import "TalksViewController.h"
 #import "NSManagedObjectContext+ActiveRecord.h"
-#import "DDLog.h"
-#import "DDASLLogger.h"
-#import "DDTTYLogger.h"
-
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation BarCampAppDelegate
 
@@ -28,19 +25,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
 	[application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-	
-	//setup cocoa lumberjack for logging
-	[DDLog addLogger:[DDASLLogger sharedInstance]];
-	[DDLog addLogger:[DDTTYLogger sharedInstance]];
-		
+			
     //set the base URL hostname for all requests
 #ifdef DEBUG
-	self.baseUrlStr = @"192.168.1.53:3000";
+	self.baseUrlStr = @"192.168.0.195:3000";
 #else
-	self.baseUrlStr = @"barcamptampabayapi.org";
+	self.baseUrlStr = @"glowing-robot-18.heroku.com";
 #endif
 	
-	DDLogVerbose(@"Base URL: %@",baseUrlStr);	
+	DLog(@"Base URL: %@",baseUrlStr);	
 	
 	//set the default MOC for ActiveRecord
 	NSManagedObjectContext *context = [self managedObjectContext];
@@ -71,9 +64,22 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
+	//attempt to update talks
+	for(UIViewController *vc in tabBarController.viewControllers) {
+		if ([vc isKindOfClass:[TalksNavViewController class]]) {
+			TalksNavViewController *tnVC = (TalksNavViewController *) vc;
+			UINavigationController *navVC = tnVC.navigationController;
+			
+			for(UIViewController *vc2 in navVC.viewControllers) {
+				if ([vc2 isKindOfClass:[TalksViewController class]]) {
+					TalksViewController *talksVC = (TalksViewController *) vc2;
+					[talksVC refreshTalks];
+					break;
+				}//talksVC
+			}//nav VC loop
+			break;
+		}//talksNavVC
+	}//tabBar VC loop
 }
 
 

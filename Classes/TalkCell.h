@@ -9,23 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Talk.h"
 
-@interface TalkCell : UITableViewCell {
-	IBOutlet UILabel *roomLabel;
-	IBOutlet UILabel *nameLabel;
-	IBOutlet UILabel *timeLabel;	
-	UIButton *favButton;
-	UIView *backgroundColorView;
-	Talk *talk;
+@interface TalkCell : UITableViewCell {	
 }
 
 @property (nonatomic, retain) Talk *talk;
-@property (nonatomic, retain) UIButton *favButton;
-@property (nonatomic, retain) UIView *backgroundColorView;
+@property (nonatomic, retain) IBOutlet UILabel *roomLabel;
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *checkImageView;
 
 + (void)createColorArray;
-
 - (UIColor *)colorForRoomId:(int)rId;
-- (void)favoriteButtonWasPressed;
-- (void)setFavoriteImage;
 
 @end

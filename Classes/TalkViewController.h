@@ -9,18 +9,27 @@
 #import <UIKit/UIKit.h>
 #import "Talk.h"
 
-@interface TalkViewController : UIViewController {
-	IBOutlet UILabel *whatLabel;
-	IBOutlet UILabel *whoLabel;
-	IBOutlet UILabel *whereLabel;
-	IBOutlet UILabel *whenLabel;
-	UIButton *favButton;
-	Talk *talk;
+@protocol TalkViewControllerDelegate
+@required
+- (void)returningFromTalkViewController;
+@end
+
+
+@interface TalkViewController : UIViewController {		
 }
 
+@property (nonatomic, assign) id <TalkViewControllerDelegate> talkVCDelegate;
 @property (nonatomic, retain) Talk *talk;
+@property (nonatomic, retain) IBOutlet UILabel *whatLabel;
+@property (nonatomic, retain) IBOutlet UILabel *whoLabel;
+@property (nonatomic, retain) IBOutlet UILabel *whereLabel;
+@property (nonatomic, retain) IBOutlet UILabel *whenLabel;
+@property (nonatomic, retain) IBOutlet UIButton *interestedButton;
+@property (nonatomic, retain) IBOutlet UIButton *twitterButton;
 
 - (void)setUILabelWithTopAlign:(UILabel *)myLabel withMaxFrame:(CGRect)maxFrame withText:(NSString *)theText;
-- (void)favoriteButtonWasPressed;
+- (IBAction)interestedButtonWasPressed;
+- (void)setInterestedButtonImage;
+- (IBAction)twitterButtonWasPressed;
 
 @end
