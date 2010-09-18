@@ -44,3 +44,14 @@ http://yourwebsvc.org/sponsors.json which returns json of this form:
 
 Currently the app requires the dates of the BarCamp to be written to the Days.plist file.  It could be refactored to get the days from the web service and thus not require a yearly update.
 
+## Attributions ##
+
+The following projects are used in the 2010 version of this app:
+
+	* ASIHttpRequest: http://allseeing-i.com/ASIHTTPRequest/
+
+	* ActiveRecord: http://bitbucket.org/magicalpanda/activerecord-for-core-data/overview
+
+	* TouchJSON: http://github.com/schwa/touchcode
+
+	* MBProgressHUD: http://github.com/jdg/MBProgressHUD

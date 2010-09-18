@@ -303,13 +303,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4C23C0411241B1B100D8262B /* MDProgressHUD */ = {
+		4C23C0411241B1B100D8262B /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
 				4C23C0441241B1BE00D8262B /* MBProgressHUD.h */,
 				4C23C0451241B1BE00D8262B /* MBProgressHUD.m */,
 			);
-			name = MDProgressHUD;
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		4C42A48C123EE90F001E27C9 /* ActiveRecord */ = {
@@ -400,7 +400,7 @@
 		4CBD5BCF123BF27B0080A14F /* External */ = {
 			isa = PBXGroup;
 			children = (
-				4C23C0411241B1B100D8262B /* MDProgressHUD */,
+				4C23C0411241B1B100D8262B /* MBProgressHUD */,
 				4C42A48C123EE90F001E27C9 /* ActiveRecord */,
 				4CBD5C39123BFB4B0080A14F /* ASIHttpRequest */,
 				4CBD5BD6123BF3760080A14F /* TouchJSON */,
