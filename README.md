@@ -48,10 +48,10 @@ Currently the app requires the dates of the BarCamp to be written to the Days.pl
 
 The following projects are used in the 2010 version of this app:
 
-	* ASIHttpRequest: http://allseeing-i.com/ASIHTTPRequest/
+* ASIHttpRequest: http://allseeing-i.com/ASIHTTPRequest/
 
-	* ActiveRecord: http://bitbucket.org/magicalpanda/activerecord-for-core-data/overview
+* ActiveRecord: http://bitbucket.org/magicalpanda/activerecord-for-core-data/overview
 
-	* TouchJSON: http://github.com/schwa/touchcode
+* TouchJSON: http://github.com/schwa/touchcode
 
-	* MBProgressHUD: http://github.com/jdg/MBProgressHUD
+* MBProgressHUD: http://github.com/jdg/MBProgressHUD
