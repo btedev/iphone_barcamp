@@ -34,7 +34,6 @@
 	NSData *jsonData = [responseString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *error = nil;
 	
-	BOOL newObjects = NO;
 	NSDictionary *dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
 	if ([dictionary objectForKey:@"sponsors"]) {
 		NSArray *sponsors = [dictionary objectForKey:@"sponsors"];
@@ -49,13 +48,12 @@
 				Sponsor *sNew = [NSEntityDescription insertNewObjectForEntityForName:@"Sponsor" 
 															  inManagedObjectContext:context];
 				sNew.name = [innerDict objectForKey:@"name"];
-				sNew.link = [innerDict objectForKey:@"homepage"];
-				newObjects = YES;
+				sNew.link = [innerDict objectForKey:@"homepage"];				
 			}//isNew			
 		}//sponsors loop
 	}//json sanity test
 	
-	if (newObjects) {
+	if ([context hasChanges]) {
 		if(![context save:&error]) {
 			DLog(@"Failed to save to data store: %@", [error localizedDescription]);
 		}
