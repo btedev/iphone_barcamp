@@ -33,6 +33,7 @@
 		d.date = [formatter dateFromString:[day objectForKey:@"Date"]];
 		d.description = [day objectForKey:@"Description"];
 		[arr addObject:d];
+		[d release];
 	}
 	
 	[formatter release];	
