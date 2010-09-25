@@ -54,7 +54,7 @@
 	
 	//loop over values and return a given day if date is == day
 	for(Day *aDay in days) {
-		if ([date compare:aDay.date] == NSOrderedSame) {
+		if ([date compare:aDay.date] == NSOrderedSame || [date compare:aDay.date] == NSOrderedDescending) {
 			return aDay;
 		}
 	}

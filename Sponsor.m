@@ -29,7 +29,7 @@
 + (void)requestFinished:(ASIHTTPRequest *)request {
 	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
 	NSString *responseString = [request responseString];
-	//DLog(@"%@",responseString);
+	DLog(@"%@",responseString);
 		
 	NSData *jsonData = [responseString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *error = nil;

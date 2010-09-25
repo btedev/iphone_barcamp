@@ -28,7 +28,7 @@
 			
     //set the base URL hostname for all requests
 #ifdef DEBUG
-	self.baseUrlStr = @"192.168.0.195:3000";
+	self.baseUrlStr = @"0.0.0.0:3000";
 #else
 	self.baseUrlStr = @"glowing-robot-18.heroku.com";
 #endif
