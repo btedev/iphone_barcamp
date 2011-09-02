@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  TwitterViewController.h
 //  BarCamp
 //
 //  Created by Barry Ezell on 9/2/11.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface TwitterViewController : UIViewController
 
 @end

@@ -14,10 +14,26 @@
 		4C4ED44B14111CED00BE8DA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED44A14111CED00BE8DA2 /* main.m */; };
 		4C4ED44F14111CED00BE8DA2 /* BarCampAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED44E14111CED00BE8DA2 /* BarCampAppDelegate.m */; };
 		4C4ED45214111CEE00BE8DA2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED45014111CEE00BE8DA2 /* MainWindow.xib */; };
-		4C4ED45514111CEE00BE8DA2 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED45414111CEE00BE8DA2 /* FirstViewController.m */; };
-		4C4ED45814111CEE00BE8DA2 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED45714111CEE00BE8DA2 /* SecondViewController.m */; };
-		4C4ED45B14111CEE00BE8DA2 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED45914111CEE00BE8DA2 /* FirstView.xib */; };
-		4C4ED45E14111CEE00BE8DA2 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED45C14111CEE00BE8DA2 /* SecondView.xib */; };
+		4C4ED46514111DED00BE8DA2 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED46414111DED00BE8DA2 /* money.png */; };
+		4C4ED46714111DFF00BE8DA2 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED46614111DFF00BE8DA2 /* calendar.png */; };
+		4C4ED46A14111E9200BE8DA2 /* twitter_newbird_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED46914111E9200BE8DA2 /* twitter_newbird_white.png */; };
+		4C4ED47014111FD400BE8DA2 /* BCWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED46E14111FD300BE8DA2 /* BCWebViewController.m */; };
+		4C4ED47114111FD400BE8DA2 /* BCWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED46F14111FD400BE8DA2 /* BCWebViewController.xib */; };
+		4C4ED4751411201500BE8DA2 /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED4731411201500BE8DA2 /* TwitterViewController.m */; };
+		4C4ED4761411201500BE8DA2 /* TwitterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4ED4741411201500BE8DA2 /* TwitterViewController.xib */; };
+		4CCB881C141120ED0066E4A7 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8809141120ED0066E4A7 /* ASIAuthenticationDialog.m */; };
+		4CCB881D141120ED0066E4A7 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB880C141120ED0066E4A7 /* ASIDataCompressor.m */; };
+		4CCB881E141120ED0066E4A7 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB880E141120ED0066E4A7 /* ASIDataDecompressor.m */; };
+		4CCB881F141120ED0066E4A7 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8810141120ED0066E4A7 /* ASIDownloadCache.m */; };
+		4CCB8820141120ED0066E4A7 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8812141120ED0066E4A7 /* ASIFormDataRequest.m */; };
+		4CCB8821141120ED0066E4A7 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8814141120ED0066E4A7 /* ASIHTTPRequest.m */; };
+		4CCB8822141120ED0066E4A7 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8818141120ED0066E4A7 /* ASIInputStream.m */; };
+		4CCB8823141120ED0066E4A7 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB881A141120ED0066E4A7 /* ASINetworkQueue.m */; };
+		4CCB8826141120F90066E4A7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB8825141120F90066E4A7 /* Reachability.m */; };
+		4CCB882C141121330066E4A7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCB8827141121330066E4A7 /* CFNetwork.framework */; };
+		4CCB882D141121330066E4A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCB8829141121330066E4A7 /* libz.dylib */; };
+		4CCB882E141121330066E4A7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCB882A141121330066E4A7 /* MobileCoreServices.framework */; };
+		4CCB882F141121330066E4A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCB882B141121330066E4A7 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +48,42 @@
 		4C4ED44D14111CED00BE8DA2 /* BarCampAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BarCampAppDelegate.h; sourceTree = "<group>"; };
 		4C4ED44E14111CED00BE8DA2 /* BarCampAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarCampAppDelegate.m; sourceTree = "<group>"; };
 		4C4ED45114111CEE00BE8DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		4C4ED45314111CEE00BE8DA2 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		4C4ED45414111CEE00BE8DA2 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		4C4ED45614111CEE00BE8DA2 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		4C4ED45714111CEE00BE8DA2 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		4C4ED45A14111CEE00BE8DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		4C4ED45D14111CEE00BE8DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		4C4ED46414111DED00BE8DA2 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money.png; sourceTree = "<group>"; };
+		4C4ED46614111DFF00BE8DA2 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		4C4ED46914111E9200BE8DA2 /* twitter_newbird_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_newbird_white.png; sourceTree = "<group>"; };
+		4C4ED46D14111FD300BE8DA2 /* BCWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCWebViewController.h; sourceTree = "<group>"; };
+		4C4ED46E14111FD300BE8DA2 /* BCWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCWebViewController.m; sourceTree = "<group>"; };
+		4C4ED46F14111FD400BE8DA2 /* BCWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BCWebViewController.xib; sourceTree = "<group>"; };
+		4C4ED4721411201500BE8DA2 /* TwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterViewController.h; sourceTree = "<group>"; };
+		4C4ED4731411201500BE8DA2 /* TwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterViewController.m; sourceTree = "<group>"; };
+		4C4ED4741411201500BE8DA2 /* TwitterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwitterViewController.xib; sourceTree = "<group>"; };
+		4CCB8808141120ED0066E4A7 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		4CCB8809141120ED0066E4A7 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		4CCB880A141120ED0066E4A7 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		4CCB880B141120ED0066E4A7 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		4CCB880C141120ED0066E4A7 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		4CCB880D141120ED0066E4A7 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		4CCB880E141120ED0066E4A7 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		4CCB880F141120ED0066E4A7 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		4CCB8810141120ED0066E4A7 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		4CCB8811141120ED0066E4A7 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		4CCB8812141120ED0066E4A7 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		4CCB8813141120ED0066E4A7 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		4CCB8814141120ED0066E4A7 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		4CCB8815141120ED0066E4A7 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		4CCB8816141120ED0066E4A7 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		4CCB8817141120ED0066E4A7 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		4CCB8818141120ED0066E4A7 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		4CCB8819141120ED0066E4A7 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		4CCB881A141120ED0066E4A7 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		4CCB881B141120ED0066E4A7 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		4CCB8824141120F90066E4A7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4CCB8825141120F90066E4A7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		4CCB8827141121330066E4A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4CCB8828141121330066E4A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4CCB8829141121330066E4A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		4CCB882A141121330066E4A7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4CCB882B141121330066E4A7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +91,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCB882C141121330066E4A7 /* CFNetwork.framework in Frameworks */,
+				4C4ED44314111CED00BE8DA2 /* CoreGraphics.framework in Frameworks */,
+				4CCB882D141121330066E4A7 /* libz.dylib in Frameworks */,
+				4CCB882E141121330066E4A7 /* MobileCoreServices.framework in Frameworks */,
+				4CCB882F141121330066E4A7 /* SystemConfiguration.framework in Frameworks */,
 				4C4ED43F14111CED00BE8DA2 /* UIKit.framework in Frameworks */,
 				4C4ED44114111CED00BE8DA2 /* Foundation.framework in Frameworks */,
-				4C4ED44314111CED00BE8DA2 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +107,7 @@
 		4C4ED42F14111CED00BE8DA2 = {
 			isa = PBXGroup;
 			children = (
+				4CCB882B141121330066E4A7 /* SystemConfiguration.framework */,
 				4C4ED44414111CED00BE8DA2 /* BarCamp */,
 				4C4ED43D14111CED00BE8DA2 /* Frameworks */,
 				4C4ED43B14111CED00BE8DA2 /* Products */,
@@ -74,6 +125,10 @@
 		4C4ED43D14111CED00BE8DA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CCB8827141121330066E4A7 /* CFNetwork.framework */,
+				4CCB8828141121330066E4A7 /* CoreGraphics.framework */,
+				4CCB8829141121330066E4A7 /* libz.dylib */,
+				4CCB882A141121330066E4A7 /* MobileCoreServices.framework */,
 				4C4ED43E14111CED00BE8DA2 /* UIKit.framework */,
 				4C4ED44014111CED00BE8DA2 /* Foundation.framework */,
 				4C4ED44214111CED00BE8DA2 /* CoreGraphics.framework */,
@@ -86,13 +141,13 @@
 			children = (
 				4C4ED44D14111CED00BE8DA2 /* BarCampAppDelegate.h */,
 				4C4ED44E14111CED00BE8DA2 /* BarCampAppDelegate.m */,
+				4C4ED46D14111FD300BE8DA2 /* BCWebViewController.h */,
+				4C4ED46E14111FD300BE8DA2 /* BCWebViewController.m */,
+				4C4ED46F14111FD400BE8DA2 /* BCWebViewController.xib */,
 				4C4ED45014111CEE00BE8DA2 /* MainWindow.xib */,
-				4C4ED45314111CEE00BE8DA2 /* FirstViewController.h */,
-				4C4ED45414111CEE00BE8DA2 /* FirstViewController.m */,
-				4C4ED45614111CEE00BE8DA2 /* SecondViewController.h */,
-				4C4ED45714111CEE00BE8DA2 /* SecondViewController.m */,
-				4C4ED45914111CEE00BE8DA2 /* FirstView.xib */,
-				4C4ED45C14111CEE00BE8DA2 /* SecondView.xib */,
+				4C4ED4721411201500BE8DA2 /* TwitterViewController.h */,
+				4C4ED4731411201500BE8DA2 /* TwitterViewController.m */,
+				4C4ED4741411201500BE8DA2 /* TwitterViewController.xib */,
 				4C4ED44514111CED00BE8DA2 /* Supporting Files */,
 			);
 			path = BarCamp;
@@ -101,12 +156,61 @@
 		4C4ED44514111CED00BE8DA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C4ED4771411204300BE8DA2 /* External */,
+				4C4ED46814111E0700BE8DA2 /* Images */,
 				4C4ED44614111CED00BE8DA2 /* BarCamp-Info.plist */,
 				4C4ED44714111CED00BE8DA2 /* InfoPlist.strings */,
 				4C4ED44A14111CED00BE8DA2 /* main.m */,
 				4C4ED44C14111CED00BE8DA2 /* BarCamp-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C4ED46814111E0700BE8DA2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4C4ED46914111E9200BE8DA2 /* twitter_newbird_white.png */,
+				4C4ED46614111DFF00BE8DA2 /* calendar.png */,
+				4C4ED46414111DED00BE8DA2 /* money.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		4C4ED4771411204300BE8DA2 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				4CCB8806141120DD0066E4A7 /* ASIHttpRequest */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		4CCB8806141120DD0066E4A7 /* ASIHttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				4CCB8808141120ED0066E4A7 /* ASIAuthenticationDialog.h */,
+				4CCB8809141120ED0066E4A7 /* ASIAuthenticationDialog.m */,
+				4CCB880A141120ED0066E4A7 /* ASICacheDelegate.h */,
+				4CCB880B141120ED0066E4A7 /* ASIDataCompressor.h */,
+				4CCB880C141120ED0066E4A7 /* ASIDataCompressor.m */,
+				4CCB880D141120ED0066E4A7 /* ASIDataDecompressor.h */,
+				4CCB880E141120ED0066E4A7 /* ASIDataDecompressor.m */,
+				4CCB880F141120ED0066E4A7 /* ASIDownloadCache.h */,
+				4CCB8810141120ED0066E4A7 /* ASIDownloadCache.m */,
+				4CCB8811141120ED0066E4A7 /* ASIFormDataRequest.h */,
+				4CCB8812141120ED0066E4A7 /* ASIFormDataRequest.m */,
+				4CCB8813141120ED0066E4A7 /* ASIHTTPRequest.h */,
+				4CCB8814141120ED0066E4A7 /* ASIHTTPRequest.m */,
+				4CCB8815141120ED0066E4A7 /* ASIHTTPRequestConfig.h */,
+				4CCB8816141120ED0066E4A7 /* ASIHTTPRequestDelegate.h */,
+				4CCB8817141120ED0066E4A7 /* ASIInputStream.h */,
+				4CCB8818141120ED0066E4A7 /* ASIInputStream.m */,
+				4CCB8819141120ED0066E4A7 /* ASINetworkQueue.h */,
+				4CCB881A141120ED0066E4A7 /* ASINetworkQueue.m */,
+				4CCB881B141120ED0066E4A7 /* ASIProgressDelegate.h */,
+				4CCB8824141120F90066E4A7 /* Reachability.h */,
+				4CCB8825141120F90066E4A7 /* Reachability.m */,
+			);
+			name = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +262,11 @@
 			files = (
 				4C4ED44914111CED00BE8DA2 /* InfoPlist.strings in Resources */,
 				4C4ED45214111CEE00BE8DA2 /* MainWindow.xib in Resources */,
-				4C4ED45B14111CEE00BE8DA2 /* FirstView.xib in Resources */,
-				4C4ED45E14111CEE00BE8DA2 /* SecondView.xib in Resources */,
+				4C4ED46514111DED00BE8DA2 /* money.png in Resources */,
+				4C4ED46714111DFF00BE8DA2 /* calendar.png in Resources */,
+				4C4ED46A14111E9200BE8DA2 /* twitter_newbird_white.png in Resources */,
+				4C4ED47114111FD400BE8DA2 /* BCWebViewController.xib in Resources */,
+				4C4ED4761411201500BE8DA2 /* TwitterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +279,17 @@
 			files = (
 				4C4ED44B14111CED00BE8DA2 /* main.m in Sources */,
 				4C4ED44F14111CED00BE8DA2 /* BarCampAppDelegate.m in Sources */,
-				4C4ED45514111CEE00BE8DA2 /* FirstViewController.m in Sources */,
-				4C4ED45814111CEE00BE8DA2 /* SecondViewController.m in Sources */,
+				4C4ED47014111FD400BE8DA2 /* BCWebViewController.m in Sources */,
+				4C4ED4751411201500BE8DA2 /* TwitterViewController.m in Sources */,
+				4CCB881C141120ED0066E4A7 /* ASIAuthenticationDialog.m in Sources */,
+				4CCB881D141120ED0066E4A7 /* ASIDataCompressor.m in Sources */,
+				4CCB881E141120ED0066E4A7 /* ASIDataDecompressor.m in Sources */,
+				4CCB881F141120ED0066E4A7 /* ASIDownloadCache.m in Sources */,
+				4CCB8820141120ED0066E4A7 /* ASIFormDataRequest.m in Sources */,
+				4CCB8821141120ED0066E4A7 /* ASIHTTPRequest.m in Sources */,
+				4CCB8822141120ED0066E4A7 /* ASIInputStream.m in Sources */,
+				4CCB8823141120ED0066E4A7 /* ASINetworkQueue.m in Sources */,
+				4CCB8826141120F90066E4A7 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,22 +310,6 @@
 				4C4ED45114111CEE00BE8DA2 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		4C4ED45914111CEE00BE8DA2 /* FirstView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C4ED45A14111CEE00BE8DA2 /* en */,
-			);
-			name = FirstView.xib;
-			sourceTree = "<group>";
-		};
-		4C4ED45C14111CEE00BE8DA2 /* SecondView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C4ED45D14111CEE00BE8DA2 /* en */,
-			);
-			name = SecondView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -264,6 +364,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BarCamp/BarCamp-Prefix.pch";
 				INFOPLIST_FILE = "BarCamp/BarCamp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -275,6 +376,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BarCamp/BarCamp-Prefix.pch";
 				INFOPLIST_FILE = "BarCamp/BarCamp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -299,6 +401,7 @@
 				4C4ED46314111CEE00BE8DA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

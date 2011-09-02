@@ -17,6 +17,9 @@
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
+    
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

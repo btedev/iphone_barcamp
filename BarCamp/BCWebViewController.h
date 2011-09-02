@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  BCWebViewController.h
 //  BarCamp
 //
 //  Created by Barry Ezell on 9/2/11.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface BCWebViewController : UIViewController
+
+@property (nonatomic, retain) IBOutlet UIWebView    *webView;
 
 @end
