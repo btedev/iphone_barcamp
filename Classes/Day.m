@@ -46,15 +46,20 @@
 //if it's after the last day, choose the last, etc...
 + (Day *)logicalDay:(NSArray *)days forDate:(NSDate *)date {
 	
+	return [days objectAtIndex:0];
+	
+	//Logic problem below (stupid logic error)
 	//test to see if date is < first day
+	/*
 	Day *firstDay = [days objectAtIndex:0];
 	if ([date compare:firstDay.date] == NSOrderedAscending) {
 		return firstDay;
 	} 
 	
 	//loop over values and return a given day if date is == day
-	for(Day *aDay in days) {
-		if ([date compare:aDay.date] == NSOrderedSame || [date compare:aDay.date] == NSOrderedDescending) {
+	for(int i=0; i<[days count]; i++) {
+		aDay = [days objectAtIndex:i];
+		if ([date compare:aDay.date] == NSOrderedSame) {
 			return aDay;
 		}
 	}
@@ -66,6 +71,9 @@
 	}
 	
 	return nil;
+	 */
+	
+	
 }
 
 + (Day *)logicalDay:(NSArray *)days {

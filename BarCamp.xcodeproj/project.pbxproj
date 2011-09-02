@@ -703,7 +703,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DBB953B8-2E3D-4073-B7F0-59EBED7C2563";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52ACFE98-A195-4EFB-B49A-05A16D91BF99";
 				SDKROOT = iphoneos4.1;
 			};
 			name = "Ad Hoc";
@@ -819,7 +819,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
