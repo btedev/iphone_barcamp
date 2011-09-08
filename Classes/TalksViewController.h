@@ -11,7 +11,6 @@
 #import "MBProgressHUD.h"
 #import "Talk.h"
 #import "TalkCell.h"
-#import "Day.h"
 
 @interface TalksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, MBProgressHUDDelegate> {
 	
@@ -24,7 +23,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) Day *currentDay;
 @property (nonatomic, retain) NSArray *days;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

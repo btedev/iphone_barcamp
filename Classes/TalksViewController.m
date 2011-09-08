@@ -18,12 +18,11 @@
 
 @implementation TalksViewController
 
-@synthesize tableView, currentDay, days;
+@synthesize tableView, days;
 @synthesize fetchedResultsController=fetchedResultsController_, managedObjectContext=managedObjectContext_;
 
 - (void)dealloc {
 	[days release];
-	[currentDay release];	
 	[tableView release];
     [fetchedResultsController_ release];
     [managedObjectContext_ release];
@@ -53,13 +52,8 @@
 	UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:lButton];
 	self.navigationItem.leftBarButtonItem = leftItem;
 	[leftItem release];	
-	
-	//Get the array of BarCamp days
-	self.days = [Day plistDaysArray];	
-	
-	//Set the current day to the logical date and update the navigation item
-	self.currentDay = [Day logicalDay:days];
-	self.navigationItem.title = self.currentDay.description;
+		
+	self.navigationItem.title = @"Schedule";
 		
 	//set the MOC
 	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -140,21 +134,7 @@
 //change days by increment amount 
 //if requested day is available
 - (void)dayChangeByIncrement:(int)incr {
-	
-	//obtain current day index
-	int idx = [self.days indexOfObject:self.currentDay];
-	idx += incr;
-	
-	//change if possible
-	if (idx >= 0 && idx <= [days count] - 1) {
-		self.currentDay = [days objectAtIndex:idx];
-		DLog(@"Changing day to %@", self.currentDay.description);
-		self.navigationItem.title = self.currentDay.description;
-		
-		fetchedResultsController_ = nil;
-		self.fetchedResultsController = nil;
-		[self.tableView reloadData];
-	}
+    
 }
 
 #pragma mark -
@@ -228,7 +208,6 @@
     return NO;
 }
 
-
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -271,11 +250,7 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Talk" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-	
-	//Only present results from the currentDay
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"day == %@",self.currentDay.date];
-	[fetchRequest setPredicate:predicate];
-    
+	    
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
