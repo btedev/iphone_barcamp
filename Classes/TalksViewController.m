@@ -34,26 +34,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	//add left and right buttons.  Note: see README regarding button images.  They are commercial and are not included
-	//in the source posted on github
-	UIButton *rButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	rButton.bounds = CGRectMake(0,0,36,36);
-	[rButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
-	[rButton addTarget:self action:@selector(forwardButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];		
-	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rButton];	
-	self.navigationItem.rightBarButtonItem = rightItem;
-	[rightItem release];
-	
-	UIButton *lButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	lButton.bounds = CGRectMake(0,0,36,36);
-	[lButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-	[lButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];		
-	UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:lButton];
-	self.navigationItem.leftBarButtonItem = leftItem;
-	[leftItem release];	
-		
-	self.navigationItem.title = @"Schedule";
+			
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
+    NSInteger year = [components year];
+	self.navigationItem.title = [NSString stringWithFormat:@"BarCamp %i",year];
 		
 	//set the MOC
 	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -118,23 +102,6 @@
 			[Talk refreshTalks];
 		}
 	}
-}
-
-#pragma mark -
-#pragma day movement methods
-
-- (void)forwardButtonWasPressed {
-	[self dayChangeByIncrement:1];
-}
-
-- (void)backButtonWasPressed {
-	[self dayChangeByIncrement:-1];
-}
-
-//change days by increment amount 
-//if requested day is available
-- (void)dayChangeByIncrement:(int)incr {
-    
 }
 
 #pragma mark -
@@ -220,6 +187,8 @@
 	//toggle its "interested" button, insert/delete a row on the server and wait for a refresh locally,
 	//then navigate back to this VC. 
 	suspendingUpdates = YES;
+    
+    NSLog(@"touched");
 	
 	TalkViewController *talkVC = [[TalkViewController alloc] initWithNibName:@"TalkViewController" 
 																	 bundle:nil];

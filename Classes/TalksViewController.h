@@ -29,8 +29,6 @@
 
 - (void)performInitialTalkRequest;
 - (TalkCell *) createNewTalkCellFromNib;
-- (void)forwardButtonWasPressed;
-- (void)backButtonWasPressed;
 - (void)dayChangeByIncrement:(int)incr;
 - (void)refreshTalks;
 
