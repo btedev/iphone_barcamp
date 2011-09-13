@@ -8,7 +8,7 @@
 		<string>Icon@2x.png</string>
 	</array>
 	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
+	<false/>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

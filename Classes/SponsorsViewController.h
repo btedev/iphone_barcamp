@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (SponsorCell *) createNewSponsorCellFromNib;
+- (void)refreshSponsors;
 
 @end

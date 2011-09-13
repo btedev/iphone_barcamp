@@ -3,7 +3,7 @@
 //  BarCamp
 //
 //  Created by Barry Ezell on 8/27/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved
+//  Copyright 2009 Barry Ezell. All rights reserved
 //  
 
 #import "TalkViewController.h"

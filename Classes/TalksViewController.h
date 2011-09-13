@@ -3,7 +3,7 @@
 //  BarCamp
 //
 //  Created by Barry Ezell on 9/11/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Barry Ezell 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -29,7 +29,6 @@
 
 - (void)performInitialTalkRequest;
 - (TalkCell *) createNewTalkCellFromNib;
-- (void)dayChangeByIncrement:(int)incr;
 - (void)refreshTalks;
 
 @end

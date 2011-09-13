@@ -3,7 +3,7 @@
 //  BarCamp
 //
 //  Created by Barry Ezell on 9/11/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Barry Ezell 2010. All rights reserved.
 //
 
 #import "TalksViewController.h"
@@ -22,6 +22,10 @@
 @synthesize fetchedResultsController=fetchedResultsController_, managedObjectContext=managedObjectContext_;
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self                                               
+                                                    name:@"AppEnteringForeground" 
+                                                  object:nil];
+    
 	[days release];
 	[tableView release];
     [fetchedResultsController_ release];
@@ -56,9 +60,15 @@
     [self.view addSubview:HUD];
     HUD.delegate = self;	
     HUD.labelText = @"Updating";
-	
+        	
     // Show the HUD while the provided method executes in a new thread
     [HUD showWhileExecuting:@selector(performInitialTalkRequest) onTarget:self withObject:nil animated:YES];
+    
+    // Register an observer for the app resuming from background
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(refreshTalks) 
+                                                 name:@"AppEnteringForeground" 
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -180,16 +190,15 @@
 
 //Push the detail view for the Talk
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	//While the TalkViewController is visible, we will suspend updates from the web service
+	
+    //While the TalkViewController is visible, we will suspend updates from the web service
 	//because FetchedResultsController will throw a nasty exception if an insert or delete
 	//occurs in the underlying data while a given cell's data is in an update.  
 	//To replicate this error, comment out "suspendingUpdates" lines throughout class, select a talk,
 	//toggle its "interested" button, insert/delete a row on the server and wait for a refresh locally,
 	//then navigate back to this VC. 
 	suspendingUpdates = YES;
-    
-    NSLog(@"touched");
-	
+    	
 	TalkViewController *talkVC = [[TalkViewController alloc] initWithNibName:@"TalkViewController" 
 																	 bundle:nil];
 	Talk *talk = (Talk *) [self.fetchedResultsController objectAtIndexPath:indexPath];

@@ -3,7 +3,7 @@
 //  BarCamp
 //
 //  Created by Barry Ezell on 9/11/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Barry Ezell 2010. All rights reserved.
 //
 
 #import "BarCampAppDelegate.h"
@@ -18,10 +18,6 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)awakeFromNib {    
-    
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
 	[application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
@@ -30,14 +26,17 @@
 #ifdef DEBUG
 	self.baseUrlStr = @"0.0.0.0:3000";
 #else
-	self.baseUrlStr = @"glowing-robot-18.heroku.com";
+	self.baseUrlStr = @"barcamptampabayapi.org";
 #endif
 	
 	DLog(@"Base URL: %@",baseUrlStr);	
 	
-	//set the default MOC for ActiveRecord
+	// Set the default MOC for ActiveRecord
 	NSManagedObjectContext *context = [self managedObjectContext];
 	[NSManagedObjectContext setDefaultContext:context];
+    
+    // Do an annual sweep to delete data from last year
+    [self annualDataSweep];
 
     // Add the tab bar controller's view to the window and display.
     [window addSubview:tabBarController.view];
@@ -46,6 +45,46 @@
     return YES;
 }
 
+// Delete Talk and Sponsor data yearly in prep for current year's BarCamp.
+- (void)annualDataSweep {
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
+    NSInteger year = [components year];
+    NSInteger lastSweepYear = 2008;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *sweepYear = @"LastSweepYear";
+    if ([defaults objectForKey:sweepYear]) {
+        lastSweepYear = [defaults integerForKey:sweepYear];        
+    }
+    
+    if (year > lastSweepYear) {
+        NSLog(@"Sweeping data from year: %i",lastSweepYear);
+        [self deleteAllObjects:@"Talk"];
+        [self deleteAllObjects:@"Sponsor"];
+        [defaults setInteger:year 
+                      forKey:sweepYear];
+        [defaults synchronize];
+    }    
+}
+
+- (void)deleteAllObjects:(NSString *)entityDescription  {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:managedObjectContext_];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error;
+    NSArray *items = [managedObjectContext_ executeFetchRequest:fetchRequest error:&error];
+    [fetchRequest release];
+    
+    
+    for (NSManagedObject *managedObject in items) {
+        [managedObjectContext_ deleteObject:managedObject];        
+    }
+    if (![managedObjectContext_ save:&error]) {
+        DLog(@"Error deleting %@ - error:%@",entityDescription,error);
+    }    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
@@ -54,7 +93,6 @@
      */
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
@@ -62,33 +100,16 @@
      */
 }
 
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-	//attempt to update talks
-	for(UIViewController *vc in tabBarController.viewControllers) {
-		if ([vc isKindOfClass:[TalksNavViewController class]]) {
-			TalksNavViewController *tnVC = (TalksNavViewController *) vc;
-			UINavigationController *navVC = tnVC.navigationController;
-			
-			for(UIViewController *vc2 in navVC.viewControllers) {
-				if ([vc2 isKindOfClass:[TalksViewController class]]) {
-					TalksViewController *talksVC = (TalksViewController *) vc2;
-					[talksVC refreshTalks];
-					break;
-				}//talksVC
-			}//nav VC loop
-			break;
-		}//talksNavVC
-	}//tabBar VC loop
+	// Send notification to update talks    
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"AppEnteringForeground" object:nil];
 }
-
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
 }
-
 
 /**
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
@@ -97,14 +118,8 @@
     
     NSError *error = nil;
     if (managedObjectContext_ != nil) {
-        if ([managedObjectContext_ hasChanges] && ![managedObjectContext_ save:&error]) {
-            /*
-             Replace this implementation with code to handle the error appropriately.
-             
-             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-             */
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+        if ([managedObjectContext_ hasChanges] && ![managedObjectContext_ save:&error]) {            
+            NSLog(@"Unresolved save error in app delegate: %@, %@", error, [error userInfo]);            
         } 
     }
 }

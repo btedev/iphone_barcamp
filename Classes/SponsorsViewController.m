@@ -17,9 +17,16 @@
 
 @synthesize fetchedResultsController=fetchedResultsController_, managedObjectContext=managedObjectContext_;
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self                                               
+                                                    name:@"AppEnteringForeground" 
+                                                  object:nil];
+    [super dealloc];
+}
+
+
 #pragma mark -
 #pragma mark View lifecycle
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +34,17 @@
 	BarCampAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	self.managedObjectContext = delegate.managedObjectContext;
 	
-	//Request Sponsor to update its collection
+	[self refreshSponsors];
+        
+    // Register an observer for the app resuming from background
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshSponsors) 
+                                                 name:@"AppEnteringForeground" 
+                                               object:nil];
+}
+
+// Request Sponsor update its collection
+- (void)refreshSponsors {    
 	[Sponsor refreshSponsors];
 }
 
@@ -232,16 +249,6 @@
     [super didReceiveMemoryWarning];
     
     // Relinquish ownership any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 

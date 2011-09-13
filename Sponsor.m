@@ -18,8 +18,7 @@
 //Request an array of sponsors from the web service and update the array
 //of persisted Sponsor objects in requestFinished:
 + (void)refreshSponsors {
-	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];	
-	DLog(@"%@",delegate.baseUrlStr);
+	BarCampAppDelegate *delegate = (BarCampAppDelegate *) [[UIApplication sharedApplication] delegate];		
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@",delegate.baseUrlStr,@"sponsors.json"]];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
@@ -29,27 +28,35 @@
 + (void)requestFinished:(ASIHTTPRequest *)request {
 	NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
 	NSString *responseString = [request responseString];
-	DLog(@"%@",responseString);
+	//DLog(@"%@",responseString);
 		
 	NSData *jsonData = [responseString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
 	NSError *error = nil;
+    
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 	
 	NSDictionary *dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
 	if ([dictionary objectForKey:@"sponsors"]) {
 		NSArray *sponsors = [dictionary objectForKey:@"sponsors"];
 		for (NSDictionary *sponsor in sponsors) {
 			NSDictionary *innerDict = [sponsor valueForKey:@"sponsor"];
+            BOOL isDeleted = ([innerDict objectForKey:@"deleted_at"] == [NSNull null] ? NO : YES);
 			
 			//check for existing sponsor with same name
-			Sponsor *sTest = [Sponsor findFirstByAttribute:@"name" withValue:[innerDict objectForKey:@"name"]];
+			Sponsor *sLocal = [Sponsor findFirstByAttribute:@"name" withValue:[innerDict objectForKey:@"name"]];
 			
-			if (!sTest) {
+			if (!sLocal && !isDeleted) {
 				DLog(@"Adding sponsor %@",[innerDict objectForKey:@"name"]);				
 				Sponsor *sNew = [NSEntityDescription insertNewObjectForEntityForName:@"Sponsor" 
 															  inManagedObjectContext:context];
 				sNew.name = [innerDict objectForKey:@"name"];
 				sNew.link = [innerDict objectForKey:@"homepage"];				
-			}//isNew			
+			} else if (sLocal && isDeleted) {
+                //delete local file
+                DLog(@"Deleting local sponsor %@ to reflect server delete",sLocal.name);
+                [context deleteObject:sLocal];
+            }             		
 		}//sponsors loop
 	}//json sanity test
 	

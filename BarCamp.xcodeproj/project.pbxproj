@@ -44,9 +44,7 @@
 		4C8A0A24123C514500F378B7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8A0A23123C514500F378B7 /* SystemConfiguration.framework */; };
 		4C8A0A26123C514600F378B7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8A0A25123C514600F378B7 /* libz.dylib */; };
 		4C8A0A7C123C664F00F378B7 /* SponsorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0A7B123C664F00F378B7 /* SponsorsViewController.m */; };
-		4C8A0A84123C670200F378B7 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A0A7E123C670200F378B7 /* back.png */; };
 		4C8A0A85123C670200F378B7 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A0A7F123C670200F378B7 /* calendar.png */; };
-		4C8A0A86123C670200F378B7 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A0A80123C670200F378B7 /* forward.png */; };
 		4C8A0A87123C670200F378B7 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A0A81123C670200F378B7 /* money.png */; };
 		4CAB0D15124284EE00A81821 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CAB0D14124284EE00A81821 /* Default.png */; };
 		4CBD5BE2123BF3860080A14F /* CJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD5BD9123BF3860080A14F /* CJSONDataSerializer.m */; };
@@ -132,9 +130,7 @@
 		4C8A0A25123C514600F378B7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4C8A0A7A123C664F00F378B7 /* SponsorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SponsorsViewController.h; sourceTree = "<group>"; };
 		4C8A0A7B123C664F00F378B7 /* SponsorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SponsorsViewController.m; sourceTree = "<group>"; };
-		4C8A0A7E123C670200F378B7 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		4C8A0A7F123C670200F378B7 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
-		4C8A0A80123C670200F378B7 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		4C8A0A81123C670200F378B7 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money.png; sourceTree = "<group>"; };
 		4CAB0D14124284EE00A81821 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4CBD5BD8123BF3860080A14F /* CJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDataSerializer.h; sourceTree = "<group>"; };
@@ -343,9 +339,7 @@
 				4C85964E12411CC70095730E /* talk_bkgrnd@2x.png */,
 				4CE64D0212401FAE00D68CBE /* Icon.png */,
 				4CE64D0312401FAE00D68CBE /* Icon@2x.png */,
-				4C8A0A7E123C670200F378B7 /* back.png */,
 				4C8A0A7F123C670200F378B7 /* calendar.png */,
-				4C8A0A80123C670200F378B7 /* forward.png */,
 				4C8A0A81123C670200F378B7 /* money.png */,
 			);
 			name = Images;
@@ -549,9 +543,7 @@
 				2899E5600DE3E45000AC0155 /* TalksViewController.xib in Resources */,
 				4CBD5C0B123BF6710080A14F /* MainWindow.xib in Resources */,
 				4CBD5C0E123BF6930080A14F /* SponsorsViewController.xib in Resources */,
-				4C8A0A84123C670200F378B7 /* back.png in Resources */,
 				4C8A0A85123C670200F378B7 /* calendar.png in Resources */,
-				4C8A0A86123C670200F378B7 /* forward.png in Resources */,
 				4C8A0A87123C670200F378B7 /* money.png in Resources */,
 				4C42A4D9123EE90F001E27C9 /* LICENSE in Resources */,
 				4C42A567123F032B001E27C9 /* SponsorCell.xib in Resources */,
