@@ -30,7 +30,7 @@
 #ifdef DEBUG
 	self.baseUrlStr = @"0.0.0.0:3000";
 #else
-	self.baseUrlStr = @"glowing-robot-18.heroku.com";
+	self.baseUrlStr = @"barcamptampabayapi.org";
 #endif
 	
 	DLog(@"Base URL: %@",baseUrlStr);	
