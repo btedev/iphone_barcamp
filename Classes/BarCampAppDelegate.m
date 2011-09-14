@@ -11,6 +11,9 @@
 #import "TalksViewController.h"
 #import "NSManagedObjectContext+ActiveRecord.h"
 
+#define BASE_URL_DEV        @"0.0.0.0:3000"
+#define BASE_URL_PRODUCTION @"barcamptampabayapi.org"
+
 @implementation BarCampAppDelegate
 
 @synthesize window, tabBarController, baseUrlStr;
@@ -23,12 +26,7 @@
 	[application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 			
     //set the base URL hostname for all requests
-#ifdef DEBUG
-	self.baseUrlStr = @"0.0.0.0:3000";
-#else
-	self.baseUrlStr = @"barcamptampabayapi.org";
-#endif
-	
+	self.baseUrlStr = BASE_URL_PRODUCTION;	
 	DLog(@"Base URL: %@",baseUrlStr);	
 	
 	// Set the default MOC for ActiveRecord
